@@ -3,9 +3,11 @@ import * as React from 'react';
 
 import '@/styles/globals.css';
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
-import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
+import Provider from '@/provider';
+import { BaseLayout } from '@/components/layouts/base/base';
+import { LoadingSpinner } from '@/components/loading';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -55,7 +57,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <React.Suspense fallback={<LoadingSpinner />}>
+          <Provider>{children}</Provider>
+        </React.Suspense>
+      </body>
     </html>
   );
 }
