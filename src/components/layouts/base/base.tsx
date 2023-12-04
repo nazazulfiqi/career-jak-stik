@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import { FC, Fragment, ReactElement } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { FcDocument } from 'react-icons/fc';
-import { MdDashboard, MdLogout } from 'react-icons/md';
+import { MdDashboard, MdFindInPage, MdLogout } from 'react-icons/md';
+import { FaBuildingCircleCheck } from 'react-icons/fa6';
 
 import { TBaseLayoutProps } from './types';
 import { DiscussionRoomIcon } from './assets/icons/ic-disccussion-room';
@@ -25,16 +26,16 @@ const AuthButton: FC = (): ReactElement => (
     <Button
       // href='/auth/login'
       type='button'
-      className='border-primary-base text-primary-500 h-auto w-auto rounded-lg border-2 px-4 py-1.5'
+      className='text-primary-base border-primary-base hover:bg-primary-base h-auto w-auto rounded-md border-2 bg-white px-4 py-1.5 hover:text-white'
     >
-      Masuk
+      Login
     </Button>
     <Button
       // href='/auth/register'
       type='button'
-      className='border-primary-500 bg-primary-500 h-auto w-auto rounded-lg border-2 px-4 py-1.5 text-white'
+      className='bg-primary-base border-primary-base hover:text-primary-base h-auto w-auto rounded-md border-2 px-4 py-1.5 text-white hover:bg-white'
     >
-      Daftar
+      Sign Up
     </Button>
   </div>
 );
@@ -141,10 +142,20 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
   };
 
   const _mobile_menu_item = [
+    // {
+    //   name: 'Semua Fitur',
+    //   icon: <TbCategory2 className='p-1 text-3xl text-neutral-500' />,
+    //   href: '/semua-fitur',
+    // },
     {
-      name: 'Semua Fitur',
-      icon: <TbCategory2 className='p-1 text-3xl text-neutral-500' />,
-      href: '/semua-fitur',
+      name: 'Find Jobs',
+      icon: <MdFindInPage size={25} />,
+      href: '/panduan',
+    },
+    {
+      name: 'Browse Companies',
+      icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
+      href: '/konsultasi-dan-layanan',
     },
   ];
 
@@ -157,8 +168,8 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
         mobileMenuItems={_mobile_menu_item}
         items={_pop_up_menu}
         features={_features}
-        logo={'/images/logo-kg-new.svg'}
-        logoStyle='w-auto h-auto'
+        logo={'/svg/jobsneed-logo.svg'}
+        logoStyle='max-w-[100px] h-auto'
         userData={_profile_user}
         bottomNavItems={_bottom_nav_items}
         bottomNavRules={_nav_rules}

@@ -50,16 +50,16 @@ export const TopNav: FC<TNavbarProps> = ({
             priority
           />
         </Link>
-        {/* <div className="pl-8">
-          <ul className="hidden lg:flex gap-x-6 text-[#545559] font-[500]">
+        <div className='pl-8'>
+          <ul className='hidden gap-x-6 font-[500] text-[#545559] lg:flex'>
             <li>
-              <Link href={"#"}>Beranda</Link>
+              <Link href={'#'}>Find Jobs</Link>
             </li>
-            <li>Tentang</li>
-            <li>Program</li>
-            <li>Layanan</li>
+            <li>
+              <Link href={'#'}>Browse Companies</Link>
+            </li>
           </ul>
-        </div> */}
+        </div>
         {session && props?.bottomNavRules?.includes(pathname) && (
           <NavMenuDropDown
             bottomNavItems={props.bottomNavItems}
@@ -90,7 +90,7 @@ export const TopNav: FC<TNavbarProps> = ({
             }}
           />
         ) : null} */}
-        <NavbarFeatureMenu features={props.features} />
+        {/* <NavbarFeatureMenu features={props.features} /> */}
         {session ? (
           <>
             {/* <NavbarNotification /> */}

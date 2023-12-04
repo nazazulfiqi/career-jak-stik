@@ -13,7 +13,7 @@ export const Navbar: FC<TNavbarProps> = (props): ReactElement => {
   const { data: session } = useSession();
   const pathname = usePathname();
 
-  const includesPath = props?.bottomNavRules?.some((path) =>
+  const includesPath = props?.bottomNavRules?.some((path: any) =>
     pathname.includes(path)
   );
 
