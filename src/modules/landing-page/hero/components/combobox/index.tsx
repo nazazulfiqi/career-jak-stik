@@ -2,6 +2,7 @@
 
 import { Check, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
+import { CiLocationOn } from 'react-icons/ci';
 
 import { cn } from '@/lib/utils';
 
@@ -53,11 +54,12 @@ export function ComboboxDemo() {
           variant='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-[200px] justify-between'
+          className='w-full justify-between'
         >
+          <CiLocationOn size={16} />
           {value
             ? frameworks.find((framework) => framework.value === value)?.label
-            : 'Select framework...'}
+            : 'Jakarta, Indonesia'}
           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>

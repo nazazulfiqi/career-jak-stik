@@ -1,13 +1,19 @@
+import { Poppins } from '@next/font/google';
 import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 
+import { LoadingSpinner } from '@/components/loading';
+
+// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import { siteConfig } from '@/constant/config';
 import Provider from '@/provider';
-import { BaseLayout } from '@/components/layouts/base/base';
-import { LoadingSpinner } from '@/components/loading';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+});
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -57,7 +63,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className={poppins.className}>
         <React.Suspense fallback={<LoadingSpinner />}>
           <Provider>{children}</Provider>
         </React.Suspense>
