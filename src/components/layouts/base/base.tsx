@@ -1,23 +1,22 @@
 'use client';
 
 // import { logoutRequest } from '../../../hooks/authentications/request';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { FC, Fragment, ReactElement } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
-import { FcDocument } from 'react-icons/fc';
-import { MdDashboard, MdFindInPage, MdLogout } from 'react-icons/md';
 import { FaBuildingCircleCheck } from 'react-icons/fa6';
+import { FcDocument } from 'react-icons/fc';
+import { MdDashboard, MdFindInPage } from 'react-icons/md';
 
-import { TBaseLayoutProps } from './types';
-import { DiscussionRoomIcon } from './assets/icons/ic-disccussion-room';
+import { Navbar } from '@/components/navbar/navbar';
+import { Button } from '@/components/ui/button';
+
 import { CareerPlanIcon } from './assets/icons/ic-career-plan';
 import { ConsultationIcon } from './assets/icons/ic-consultation';
+import { DiscussionRoomIcon } from './assets/icons/ic-disccussion-room';
 import { WorkOpportunityIcon } from './assets/icons/ic-work';
-
-import { TbCategory2 } from 'react-icons/tb';
-import { Button } from '@/components/ui/button';
-import { Navbar } from '@/components/navbar/navbar';
+import { TBaseLayoutProps } from './types';
 
 // import { useProfile } from '../../../hooks/profile/hook';
 
@@ -168,12 +167,12 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
         mobileMenuItems={_mobile_menu_item}
         items={_pop_up_menu}
         features={_features}
-        logo={'/svg/jobsneed-logo.svg'}
+        logo='/svg/jobsneed-logo.svg'
         logoStyle='max-w-[100px] h-auto'
         userData={_profile_user}
         bottomNavItems={_bottom_nav_items}
         bottomNavRules={_nav_rules}
-        bottomNavItemStyle={`w-auto h-auto p-3 text-[14px] rounded-lg bg-primary-500 text-white font-reguler`}
+        bottomNavItemStyle='w-auto h-auto p-3 text-[14px] rounded-lg bg-primary-500 text-white font-reguler'
         button={<AuthButton />}
         withSearch={addSearch}
       />
