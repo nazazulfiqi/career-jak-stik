@@ -4,4 +4,5 @@ export const companiesLogos = [
   '/svg/landing-page/companies/logo-3.svg',
   '/svg/landing-page/companies/logo-4.svg',
   '/svg/landing-page/companies/logo-5.svg',
+  '/svg/landing-page/companies/logo-3.svg',
 ]
