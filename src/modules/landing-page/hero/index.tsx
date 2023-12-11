@@ -9,8 +9,8 @@ import { ComboboxDemo } from '@/modules/landing-page/hero/components/combobox';
 
 const HeroSection = () => {
   return (
-    <section className='text-neutrals-700 relative'>
-      <div className='mx-auto my-10 flex min-h-[100vh] w-full max-w-[1440px] px-8 md:px-14 lg:px-16 2xl:px-0'>
+    <section className='text-neutrals-700 bg-neutrals-100 relative  '>
+      <div className='mx-auto my-10 flex w-full max-w-[1440px] px-8 md:min-h-[50vh] md:px-14 lg:min-h-[80vh] lg:px-16 2xl:px-0'>
         <div className='w-full'>
           <div className='relative z-10 md:w-1/2 lg:w-1/3'>
             <h1 className=' mb-2 text-6xl font-bold leading-tight'>
@@ -57,7 +57,7 @@ const HeroSection = () => {
           </p>
         </div>
         <div className='absolute right-0 top-0 z-0 hidden overflow-hidden md:block'>
-          <div className='md:-mr-48'>
+          <div className='max-h-[100vh] overflow-hidden md:-mr-48'>
             <Image
               src='/svg/landing-page/hero-image.svg'
               alt='Hero Image'
@@ -66,6 +66,7 @@ const HeroSection = () => {
               // sizes='100vw'
               priority
               style={{ width: 'auto', height: 'auto' }}
+              className='object-cover'
             />
           </div>
         </div>

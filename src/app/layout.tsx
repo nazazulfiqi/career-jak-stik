@@ -1,5 +1,5 @@
-import { Poppins } from '@next/font/google';
 import { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 import * as React from 'react';
 
 import '@/styles/globals.css';
