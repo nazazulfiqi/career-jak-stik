@@ -1,8 +1,9 @@
-import { FC, ReactElement } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { TNavbarUserProps } from './types';
-import Avatar from 'react-avatar';
 import Image from 'next/image';
+import { FC, ReactElement } from 'react';
+import Avatar from 'react-avatar';
+
+import { TNavbarUserProps } from './types';
 
 export const NavbarUserMenu: FC<TNavbarUserProps> = ({
   items,
@@ -15,7 +16,7 @@ export const NavbarUserMenu: FC<TNavbarUserProps> = ({
           {userData?.avatar ? (
             <Image
               src={userData.avatar || '/profile-avatar-example.svg'}
-              alt={'user avatar'}
+              alt='user avatar'
               width={36}
               height={36}
               className='flex h-9 w-9  items-center justify-center bg-white bg-center font-[700]  text-neutral-600'
@@ -47,7 +48,7 @@ export const NavbarUserMenu: FC<TNavbarUserProps> = ({
               <figure className='flex h-9 w-9 overflow-hidden bg-neutral-200 object-cover'>
                 <Image
                   src={userData.avatar}
-                  alt={'user avatar'}
+                  alt='user avatar'
                   width={36}
                   height={36}
                   className='flex w-full  items-center justify-center bg-white font-[700] text-neutral-600'
@@ -76,9 +77,7 @@ export const NavbarUserMenu: FC<TNavbarUserProps> = ({
             <Menu.Item
               key={index}
               as='div'
-              className={
-                'flex cursor-pointer items-center gap-3 px-4 py-3 transition-all duration-300 ease-in-out hover:bg-neutral-200'
-              }
+              className='flex cursor-pointer items-center gap-3 px-4 py-3 transition-all duration-300 ease-in-out hover:bg-neutral-200'
               onClick={onClick}
             >
               {icon}

@@ -1,8 +1,9 @@
 'use client'; // Error components must be Client Components
 
-import { Button } from '@/components/ui/button';
 import * as React from 'react';
 import { RiAlarmWarningFill } from 'react-icons/ri';
+
+import { Button } from '@/components/ui/button';
 
 export default function Error({
   error,

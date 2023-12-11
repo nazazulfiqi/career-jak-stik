@@ -63,7 +63,8 @@ const HeroSection = () => {
               alt='Hero Image'
               width={0}
               height={0}
-              sizes='100vw'
+              // sizes='100vw'
+              priority
               style={{ width: 'auto', height: 'auto' }}
             />
           </div>

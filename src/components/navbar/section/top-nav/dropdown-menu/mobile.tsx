@@ -1,14 +1,15 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { FC, ReactElement } from 'react';
+import Avatar from 'react-avatar';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useRecoilState } from 'recoil';
+
 import { MobileNavbarState } from './store';
 import { TMobileMenuProps } from './types';
-import Image from 'next/image';
-import Avatar from 'react-avatar';
-import Link from 'next/link';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { useSession } from 'next-auth/react';
 
 export const HamburgerIcon: FC = (): ReactElement => {
   const [getMobileNavbar, setMobileNavbar] = useRecoilState(MobileNavbarState);
@@ -66,7 +67,7 @@ export const NavbarMobileMenu: FC<TMobileMenuProps> = ({
           {userData?.avatar ? (
             <Image
               src={userData.avatar || '/profile-avatar-example.svg'}
-              alt={'user avatar'}
+              alt='user avatar'
               width={36}
               height={36}
               className='flex  h-9 w-9 items-center justify-center rounded-md bg-white bg-center object-cover font-[700] text-neutral-600'
@@ -105,7 +106,7 @@ export const NavbarMobileMenu: FC<TMobileMenuProps> = ({
       {session ? (
         <section className=' px-1 py-2'>
           {items.map(({ icon, name, onClick }, index) => (
-            <div key={index} className={'flex items-center gap-3  py-3 '}>
+            <div key={index} className='flex items-center gap-3  py-3 '>
               {icon}
               <button type='submit' onClick={onClick}>
                 <h1 className='group:hover:text-neutral-100  text-center text-sm text-[#171717]'>

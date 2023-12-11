@@ -1,22 +1,19 @@
 'use client';
 
-import { FC, ReactElement } from 'react';
 import NextImage from 'next/image';
-import { TNavbarProps } from '../../types';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { FC, ReactElement } from 'react';
+
+// import { SearchInput } from '@kampus-gratis/components/atoms';
 import {
   HamburgerIcon,
-  NavMenuDropDown,
-  NavbarFeatureMenu,
   NavbarMobileMenu,
-  NavbarNotification,
   NavbarUserMenu,
+  NavMenuDropDown,
 } from './dropdown-menu';
-import { useRouter, usePathname } from 'next/navigation';
-// import { SearchInput } from '@kampus-gratis/components/atoms';
-import { useRecoilState } from 'recoil';
-import { navSearchKeyword } from './store';
+import { TNavbarProps } from '../../types';
 
 export const TopNav: FC<TNavbarProps> = ({
   logo,
@@ -38,7 +35,7 @@ export const TopNav: FC<TNavbarProps> = ({
   return (
     <header className='flex w-full justify-between bg-white'>
       <div className='flex items-center gap-2 md:gap-4'>
-        <Link href={'/'} className='flex items-center'>
+        <Link href='/' className='flex items-center'>
           <NextImage
             src={logo}
             alt='platform-logo'
@@ -53,10 +50,10 @@ export const TopNav: FC<TNavbarProps> = ({
         <div className='pl-8'>
           <ul className='hidden gap-x-6 font-[500] text-[#545559] lg:flex'>
             <li>
-              <Link href={'#'}>Find Jobs</Link>
+              <Link href='#'>Find Jobs</Link>
             </li>
             <li>
-              <Link href={'#'}>Browse Companies</Link>
+              <Link href='#'>Browse Companies</Link>
             </li>
           </ul>
         </div>

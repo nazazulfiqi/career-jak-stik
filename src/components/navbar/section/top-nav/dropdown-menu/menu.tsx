@@ -1,9 +1,10 @@
-import { FC, Fragment, ReactElement } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { TBottomNavProps } from '../../bot-nav/types';
-import { MdOutlineNavigateNext } from 'react-icons/md';
-import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FC, Fragment, ReactElement } from 'react';
+import { MdOutlineNavigateNext } from 'react-icons/md';
+
+import { TBottomNavProps } from '../../bot-nav/types';
 
 export const NavMenuDropDown: FC<TBottomNavProps> = ({
   bottomNavItems,

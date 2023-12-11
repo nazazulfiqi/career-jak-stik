@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { FC, ReactElement } from 'react';
-import { TBottomNavProps } from './types';
 import { usePathname } from 'next/navigation';
+import { FC, ReactElement } from 'react';
+
+import { TBottomNavProps } from './types';
 
 export const BottomNav: FC<TBottomNavProps> = ({
   bottomNavItemStyle,

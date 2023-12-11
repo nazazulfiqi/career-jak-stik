@@ -1,5 +1,6 @@
-import { TBottomNavProps } from "./section";
 import { MouseEventHandler, ReactNode } from "react";
+
+import { TBottomNavProps } from "./section";
 
 type TNavbarItem = {
   name: string;

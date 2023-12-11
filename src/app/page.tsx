@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import LandingPage from '@/modules/landing-page';
+
 /**
  * SVGR Support
  * Caveat: No React Props Type.
@@ -9,8 +11,6 @@ import * as React from 'react';
  * You can override the next-env if the type is important to you
  * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
  */
-import Logo from '~/svg/Logo.svg';
-import LandingPage from '@/modules/landing-page';
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 // Before you begin editing, follow all comments with `STARTERCONF`,

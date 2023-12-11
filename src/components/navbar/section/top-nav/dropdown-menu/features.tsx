@@ -1,7 +1,8 @@
 import { Menu, Transition } from '@headlessui/react';
+import Link from 'next/link';
 import { FC, ReactElement } from 'react';
 import { TbCategory2 } from 'react-icons/tb';
-import Link from 'next/link';
+
 import { TNavbarFeaturesProps } from './types';
 
 export const NavbarFeatureMenu: FC<TNavbarFeaturesProps> = ({
@@ -10,7 +11,7 @@ export const NavbarFeatureMenu: FC<TNavbarFeaturesProps> = ({
   return (
     <Menu
       as='div'
-      className={'relative left-0 z-50 hidden text-left lg:inline-block'}
+      className='relative left-0 z-50 hidden text-left lg:inline-block'
     >
       <Menu.Button
         as='button'
@@ -48,9 +49,7 @@ export const NavbarFeatureMenu: FC<TNavbarFeaturesProps> = ({
                   <Menu.Item
                     as='div'
                     aria-label='User'
-                    className={
-                      'flex h-full cursor-pointer flex-col items-center gap-2 bg-neutral-100 p-4 transition-all duration-300 ease-in-out hover:bg-neutral-200'
-                    }
+                    className='flex h-full cursor-pointer flex-col items-center gap-2 bg-neutral-100 p-4 transition-all duration-300 ease-in-out hover:bg-neutral-200'
                   >
                     {feature.icon}
                     <h1 className='text-center text-xs text-neutral-900'>
@@ -61,7 +60,7 @@ export const NavbarFeatureMenu: FC<TNavbarFeaturesProps> = ({
               );
             })}
           </div>
-          <Link href={'/semua-fitur'} passHref>
+          <Link href='/semua-fitur' passHref>
             <div className='group flex w-full cursor-pointer items-center justify-center bg-neutral-200 py-4 transition-colors duration-300 ease-in-out hover:bg-neutral-300'>
               <h1 className='text-xs text-neutral-500 group-hover:text-neutral-900'>
                 Lihat Semua
