@@ -4,6 +4,7 @@ import { BaseLayout } from '@/components/layouts/base/base';
 
 import CategorySection from '@/modules/landing-page/category';
 import CompaniesSection from '@/modules/landing-page/companies';
+import CTASection from '@/modules/landing-page/cta';
 import HeroSection from '@/modules/landing-page/hero';
 
 const LandingPage = () => {
@@ -12,6 +13,7 @@ const LandingPage = () => {
       <HeroSection />
       <CompaniesSection />
       <CategorySection />
+      <CTASection />
     </BaseLayout>
   );
 };
