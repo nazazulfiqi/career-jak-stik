@@ -48,7 +48,7 @@ export default {
         background: '#E5E7EB',
         topbar: '#FFFFFF',
         primary: {
-          'base' : '#4640DE'
+          'base' : '#FFC107'
         },
         secondary: {
           'base': '#CCCCF5'

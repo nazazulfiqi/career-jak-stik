@@ -1,10 +1,12 @@
 'use client';
 
-import NextImage from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { FC, ReactElement } from 'react';
+
+import { Badge } from '@/components/ui/badge';
 
 // import { SearchInput } from '@kampus-gratis/components/atoms';
 import {
@@ -35,17 +37,24 @@ export const TopNav: FC<TNavbarProps> = ({
   return (
     <header className='flex w-full justify-between bg-white'>
       <div className='flex items-center gap-2 md:gap-4'>
-        <Link href='/' className='flex items-center'>
-          <NextImage
-            src={logo}
-            alt='platform-logo'
-            loading='eager'
-            width={40}
-            height={45}
-            className={`${logoStyle} h-2 w-auto md:h-8 lg:h-9`}
-            quality={75}
-            priority
-          />
+        <Link className='flex' href='/'>
+          <div className='inline-flex items-center gap-2'>
+            <Image
+              src='/images/stmik.png'
+              alt='/images/stmik.png'
+              width={60}
+              height={60}
+            />
+            <span className='w-full text-2xl font-bold italic'>
+              Layanan Karir.
+            </span>
+          </div>
+          <Badge
+            variant='outline'
+            className='ml-1 h-6 bg-black px-2 text-white'
+          >
+            Beta
+          </Badge>
         </Link>
         <div className='pl-8'>
           <ul className='hidden gap-x-6 font-[500] text-[#545559] lg:flex'>
