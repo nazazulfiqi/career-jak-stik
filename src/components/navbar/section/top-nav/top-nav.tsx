@@ -34,6 +34,15 @@ export const TopNav: FC<TNavbarProps> = ({
   // const [getSearchingKeyword, setSearchingKeyword] =
   //   useRecoilState(navSearchKeyword);
 
+  const path = usePathname();
+
+  const menus = [
+    { title: 'Cari Lowongan', path: '/cari-lowongan' },
+    { title: 'Cari Perusahaan', path: '/cari-perusahaan' },
+    { title: 'Berita', path: '/berita' },
+    { title: 'Tentang Kami', path: '/tentang-kami' },
+  ];
+
   return (
     <header className='flex w-full justify-between bg-white'>
       <div className='flex items-center gap-2 md:gap-4'>
@@ -58,12 +67,18 @@ export const TopNav: FC<TNavbarProps> = ({
         </Link>
         <div className='pl-8'>
           <ul className='hidden gap-x-6 font-[500] text-[#545559] lg:flex'>
-            <li>
-              <Link href='#'>Find Jobs</Link>
-            </li>
-            <li>
-              <Link href='#'>Browse Companies</Link>
-            </li>
+            {menus.map((item) => (
+              <li key={item.path}>
+                <Link
+                  href={item.path}
+                  className={`${
+                    path.includes(item.path) ? 'text-primary-base' : ''
+                  } hover:text-primary-base`}
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         {session && props?.bottomNavRules?.includes(pathname) && (

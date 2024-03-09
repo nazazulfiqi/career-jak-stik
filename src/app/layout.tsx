@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import '@/styles/globals.css';
 
-import { LoadingSpinner } from '@/components/loading';
+import LoadingDots from '@/components/atoms/LoadingDots';
 
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import { siteConfig } from '@/constant/config';
@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     <html>
       <body className={poppins.className}>
-        <React.Suspense fallback={<LoadingSpinner />}>
+        <React.Suspense fallback={<LoadingDots hScreen={true} />}>
           <Provider>{children}</Provider>
         </React.Suspense>
       </body>

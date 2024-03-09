@@ -10,6 +10,7 @@ import { FcDocument } from 'react-icons/fc';
 import { MdDashboard, MdFindInPage } from 'react-icons/md';
 
 import { Navbar } from '@/components/navbar/navbar';
+import { LayoutFooter } from '@/components/organisms/footer';
 import { Button } from '@/components/ui/button';
 
 import { CareerPlanIcon } from './assets/icons/ic-career-plan';
@@ -141,18 +142,23 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
   };
 
   const _mobile_menu_item = [
-    // {
-    //   name: 'Semua Fitur',
-    //   icon: <TbCategory2 className='p-1 text-3xl text-neutral-500' />,
-    //   href: '/semua-fitur',
-    // },
     {
-      name: 'Find Jobs',
+      name: 'Cari Lowongan',
       icon: <MdFindInPage size={25} />,
       href: '/panduan',
     },
     {
-      name: 'Browse Companies',
+      name: 'Cari Perusahaan',
+      icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
+      href: '/konsultasi-dan-layanan',
+    },
+    {
+      name: 'Berita',
+      icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
+      href: '/konsultasi-dan-layanan',
+    },
+    {
+      name: 'Tentang Kami',
       icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
       href: '/konsultasi-dan-layanan',
     },
@@ -177,6 +183,7 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
         withSearch={addSearch}
       />
       <section className='flex h-full flex-col'>{children}</section>
+      <LayoutFooter />
     </Fragment>
   );
 };

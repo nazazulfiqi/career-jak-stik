@@ -6,7 +6,7 @@ import React, { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { RecoilEnv, RecoilRoot } from 'recoil';
 
-import { LoadingSpinner } from '@/components/loading';
+import LoadingDots from '@/components/atoms/LoadingDots';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +23,7 @@ function Provider({ children }: { children: React.ReactNode }) {
       <SessionProvider>
         <RecoilRoot>
           {/* <NextUIProvider> */}
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<LoadingDots hScreen={true} />}>
             {children}
             <Toaster />
           </Suspense>

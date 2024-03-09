@@ -8,6 +8,8 @@ import Avatar from 'react-avatar';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useRecoilState } from 'recoil';
 
+import { Badge } from '@/components/ui/badge';
+
 import { MobileNavbarState } from './store';
 import { TMobileMenuProps } from './types';
 
@@ -47,16 +49,25 @@ export const NavbarMobileMenu: FC<TMobileMenuProps> = ({
       } absolute left-0 right-0 border-b-2 border-neutral-300 bg-white px-4 py-4 shadow-md transition-all duration-300 ease-in-out lg:hidden`}
     >
       <section className='mb-4 flex w-full justify-between py-1.5 pl-1 pr-4'>
-        <Image
-          src={logo as string}
-          alt='platform-logo'
-          loading='eager'
-          width={40}
-          height={45}
-          className='h-6 w-auto md:h-8 lg:h-9'
-          quality={75}
-          priority
-        />
+        <Link className='flex' href='/'>
+          <div className='inline-flex items-center gap-2'>
+            <Image
+              src='/images/stmik.png'
+              alt='/images/stmik.png'
+              width={60}
+              height={60}
+            />
+            <span className='w-full text-2xl font-bold italic'>
+              Layanan Karir.
+            </span>
+          </div>
+          <Badge
+            variant='outline'
+            className='ml-1 h-6 bg-black px-2 text-white'
+          >
+            Beta
+          </Badge>
+        </Link>
         <AiOutlineClose
           className='text-neutral-base cursor-pointer text-xl font-bold'
           onClick={() => setMobileNavbar(!getMobileNavbar)}

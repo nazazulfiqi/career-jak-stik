@@ -26,7 +26,7 @@ const CardNews: FC = () => {
 
             <div className='absolute inset-0 mx-auto flex h-full w-full items-center justify-center bg-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
               <Link
-                href='/news/berita-1'
+                href='/berita/berita-1'
                 className='bg-primary-base flex items-center justify-center rounded-md bg-opacity-100 px-6 py-2 font-semibold text-white'
               >
                 Lihat
