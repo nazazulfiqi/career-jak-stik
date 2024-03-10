@@ -36,19 +36,19 @@ const LowonganModule: FC = () => {
 
   const filters = [
     {
-      name: 'kategori',
+      name: 'categories',
       label: 'Kategori',
       items: [
         {
-          id: '1',
+          id: 'kt1',
           label: 'Technology',
         },
         {
-          id: '2',
+          id: 'kt2',
           label: 'Graphic Design',
         },
         {
-          id: '3',
+          id: 'kt3',
           label: 'Sales',
         },
       ],

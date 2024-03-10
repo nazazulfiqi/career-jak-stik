@@ -9,7 +9,7 @@ import { BreadCrumb } from '@/components/atoms/bread-crumb';
 import { BaseLayout } from '@/components/layouts/base/base';
 import ExploreDataContainer from '@/containers/ExploreDataContainers';
 
-import { formFilterSchema } from '@/validations/form-schema';
+import { formFilterCompanySchema } from '@/validations/form-schema';
 
 const PerusahaanModule: FC = () => {
   const companyBC = [
@@ -23,34 +23,34 @@ const PerusahaanModule: FC = () => {
     },
   ];
 
-  const formFilter = useForm<z.infer<typeof formFilterSchema>>({
-    resolver: zodResolver(formFilterSchema),
+  const formFilter = useForm<z.infer<typeof formFilterCompanySchema>>({
+    resolver: zodResolver(formFilterCompanySchema),
     defaultValues: {
-      categories: [],
+      industry: [],
     },
   });
 
-  const onSubmitFormFilter = async (val: z.infer<typeof formFilterSchema>) => {
+  const onSubmit = async (val: z.infer<typeof formFilterCompanySchema>) => {
     console.log(val);
   };
 
   const filters = [
     {
-      name: 'Industri',
+      name: 'industry',
       label: 'Industri',
       items: [
-        {
-          id: '1',
-          label: 'Technology',
-        },
-        {
-          id: '2',
-          label: 'Graphic Design',
-        },
-        {
-          id: '3',
-          label: 'Sales',
-        },
+        { id: 'Technology', label: 'Technology' },
+        { id: 'Business', label: 'Business' },
+        { id: 'Blockchain', label: 'Blockchain' },
+        { id: 'Cloud', label: 'Cloud' },
+        { id: 'Consumer Tech', label: 'Consumer Tech' },
+        { id: 'Education', label: 'Education' },
+        { id: 'Fintech', label: 'Fintech' },
+        { id: 'Gaming', label: 'Gaming' },
+        { id: 'Food & Beverage', label: 'Food & Beverage' },
+        { id: 'Healthcare', label: 'Healthcare' },
+        { id: 'Hosting', label: 'Hosting' },
+        { id: 'Media', label: 'Media' },
       ],
     },
   ];
@@ -116,7 +116,7 @@ const PerusahaanModule: FC = () => {
       <BreadCrumb items={companyBC} />
       <ExploreDataContainer
         formFilter={formFilter}
-        onSubmitFilter={onSubmitFormFilter}
+        onSubmitFilter={onSubmit}
         filterForms={filters}
         title='dream company'
         loading={false}
