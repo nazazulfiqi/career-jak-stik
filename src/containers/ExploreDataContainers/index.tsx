@@ -49,10 +49,10 @@ const ExploreDataContainer: FC<ExploreDataContainerProps> = ({
       <div className='bg-slate-100'>
         <div className='mx-auto mb-12 w-full max-w-[1440px] px-8 pt-10 md:px-14 lg:px-16 2xl:px-0'>
           <div className='mb-10'>
-            <div className='mx-auto mb-11 flex justify-center gap-2 text-center'>
-              <span className='text-5xl font-semibold'>Find Your</span>
+            <div className='mx-auto  flex justify-center gap-2 text-center'>
+              <span className='text-5xl font-bold'>Find Your</span>
               <div className='relative'>
-                <span className='text-primary text-5xl font-semibold'>
+                <span className='text-primary-base text-5xl font-bold'>
                   {title}
                 </span>
                 {/* <div className='absolute top-10 h-10 w-[220px]'>
@@ -65,9 +65,9 @@ const ExploreDataContainer: FC<ExploreDataContainerProps> = ({
                 </div> */}
               </div>
             </div>
-            <div className='text-center text-gray-500'>{subtitle}</div>
+            <div className='mt-2 text-center text-[#A3A3A3]'>{subtitle}</div>
           </div>
-          <div>
+          <div className='mx-auto max-w-5xl'>
             <FormSearch />
           </div>
         </div>

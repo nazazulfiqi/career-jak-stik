@@ -51,7 +51,7 @@ const JobCard: FC<JobCardProps> = ({
         <Button className='w-full' size='lg'>
           Apply
         </Button>
-        <Progress value={(applicants / needs) * 100} className='mt-2' />
+        <Progress value={(applicants / needs) * 100} className='mt-2 h-2' />
         <div className='mt-2 text-center text-sm text-gray-500'>
           <span className='font-semibold text-black'>{applicants} applied</span>{' '}
           of {needs} capacity

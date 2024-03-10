@@ -12,7 +12,7 @@ import { Separator } from '@/components/ui/separator';
 const DetailLowonganContent: FC = () => {
   return (
     <section className='mx-auto w-full max-w-[1440px] px-8 md:px-14 lg:px-16 2xl:px-0'>
-      <div className='mx-auto  flex w-full flex-row items-center justify-between bg-slate-100 p-5 shadow'>
+      <div className='mx-auto mt-6 w-full flex-row items-center justify-between  bg-slate-100 p-12 shadow-md lg:flex'>
         <div className='inline-flex items-center gap-5'>
           <Image
             src='/images/stmik.png'
@@ -51,8 +51,8 @@ const DetailLowonganContent: FC = () => {
         </Button>
       </div>
 
-      <div className='flex flex-row items-start gap-10 py-16'>
-        <div className='w-3/4'>
+      <div className='gap-10 py-16 lg:flex lg:flex-row lg:items-start'>
+        <div className='w-full lg:w-3/4'>
           <div className='mb-16'>
             <div className='mb-3 text-3xl font-semibold'>Description</div>
             <div className='text-muted-foreground'>
@@ -89,7 +89,7 @@ const DetailLowonganContent: FC = () => {
             </div>
           </div>
         </div>
-        <div className='w-1/4'>
+        <div className='w-full lg:w-1/4'>
           <div>
             <div className='text-3xl font-semibold'>About this role</div>
 
@@ -132,10 +132,10 @@ const DetailLowonganContent: FC = () => {
 
           <Separator className='my-10' />
 
-          <div>
+          <div className='w-full'>
             <div className='text-3xl font-semibold'>Required Skills</div>
-            <div className='my-10 inline-flex gap-4'>
-              {[0, 1, 2, 3].map((item: any, i: number) => (
+            <div className='my-10 inline-flex flex-wrap gap-4'>
+              {[0, 1, 2, 4].map((item: any, i: number) => (
                 <Badge variant='outline' key={item + i}>
                   javascript
                 </Badge>
@@ -154,7 +154,7 @@ const DetailLowonganContent: FC = () => {
           </div>
         </div>
 
-        <div className='grid grid-cols-5 gap-5'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5'>
           {[0, 1, 2].map((item: any, i: number) => (
             <div key={i}>
               <BiCategory className='text-primary h-12 w-12' />

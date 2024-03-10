@@ -13,7 +13,7 @@ const NewsModule: FC = () => {
 
   return (
     <header className='mx-auto mb-12 flex w-full max-w-[1440px] flex-col items-center justify-center gap-2 px-8 pt-10 md:px-14 lg:px-16 2xl:px-0'>
-      <h1 className='text-3xl font-bold text-neutral-800'>Baca Berita</h1>
+      <h1 className='text-5xl font-bold text-neutral-800'>Baca Berita</h1>
       <p className='px-8 text-center text-lg text-[#A3A3A3]'>
         Temukan artikel menarik yang bakal menambah wawasanmu disini!
       </p>

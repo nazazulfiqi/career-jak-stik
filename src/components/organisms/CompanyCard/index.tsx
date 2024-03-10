@@ -18,7 +18,7 @@ const CompanyCard: FC<CompanyCardProps> = ({
 }) => {
   const router = useRouter();
 
-  return (
+return (
     <div
       onClick={() => router.push('/detail/perusahaan/' + id)}
       className='border-border cursor-pointer border p-6'

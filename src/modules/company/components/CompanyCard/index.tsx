@@ -20,7 +20,7 @@ const CompanyCard: FC<CompanyCardProps> = ({
 
   return (
     <div
-      onClick={() => router.push('/detail/company/' + id)}
+      onClick={() => router.push('/cari-perusahaan/' + id)}
       className='border-border cursor-pointer border p-6'
     >
       <div className='flex flex-row items-start justify-between'>

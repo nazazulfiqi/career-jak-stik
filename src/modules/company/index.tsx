@@ -36,8 +36,8 @@ const PerusahaanModule: FC = () => {
 
   const filters = [
     {
-      name: 'categories',
-      label: 'Categories',
+      name: 'Industri',
+      label: 'Industri',
       items: [
         {
           id: '1',

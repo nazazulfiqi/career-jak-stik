@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 
 const RelatedNewsComponent: FC = () => {
   return (
-    <Link href='/news/1'>
+  <Link href='/news/1'>
       <section className='py-2'>
         <section className='flex items-center gap-2'>
           <Image
