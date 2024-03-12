@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -12,9 +13,12 @@ const CTASection = () => {
             <h3 className='text-3xl font-bold text-white lg:text-5xl'>
               Start posting jobs today
             </h3>
-            <p className='text-white'>Start posting jobs for only $10.</p>
-            <Button className='text-primary-base w-full bg-white font-semibold hover:bg-slate-200 lg:w-1/3'>
-              Sign Up For Free
+            <p className='text-white'>Start posting jobs for free!</p>
+            <Button
+              className='text-primary-base w-full bg-white font-semibold hover:bg-slate-200 lg:w-1/3'
+              asChild
+            >
+              <Link href='/perusahaan/masuk'>Masuk</Link>
             </Button>
           </div>
           <div className='relative  w-full md:w-1/2'>

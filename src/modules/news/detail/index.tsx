@@ -58,7 +58,7 @@ const DetailNewsModule: FC = () => {
             </section>
             <section className='col-span-3 mt-6 lg:col-span-1'>
               <h1 className='font-bold'>Baca berita lainnya</h1>
-              <span className='bg-blue-base mb-2 block h-[4px] w-24 rounded-md'></span>
+              <span className='bg-primary-base mb-2 block h-[4px] w-24 rounded-md'></span>
               <div className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-primary scrollbar-track-black h-[400px] overflow-y-auto'>
                 {[0, 1, 2, 3, 4].map((item: any) => {
                   return (
