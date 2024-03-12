@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { aboutData } from '@/constants/about';
+import { aboutData } from '@/constant/about';
 
 const AboutContent: FC = () => {
   return (

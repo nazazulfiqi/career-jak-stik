@@ -1,13 +1,15 @@
 'use client';
 
 // import { logoutRequest } from '../../../hooks/authentications/request';
+import { LucideBuilding, LucideNewspaper, LucideSchool } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { FC, Fragment, ReactElement } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
-import { FaBuildingCircleCheck } from 'react-icons/fa6';
-import { FcDocument } from 'react-icons/fc';
-import { MdDashboard, MdFindInPage } from 'react-icons/md';
+import { IoDocumentTextOutline } from 'react-icons/io5';
+import { MdLogout } from 'react-icons/md';
+import { RiFileSearchLine } from 'react-icons/ri';
 
 import { Navbar } from '@/components/navbar/navbar';
 import { LayoutFooter } from '@/components/organisms/footer';
@@ -24,18 +26,20 @@ import { TBaseLayoutProps } from './types';
 const AuthButton: FC = (): ReactElement => (
   <div className='flex gap-4'>
     <Button
-      // href='/auth/login'
-      type='button'
+      asChild
       className='text-primary-base border-primary-base hover:bg-primary-base h-auto w-auto rounded-md border-2 bg-white px-4 py-1.5 hover:text-white'
     >
-      Login
+      <Link href='/auth/sign-in' type='button'>
+        Sign In
+      </Link>
     </Button>
     <Button
-      // href='/auth/register'
-      type='button'
+      asChild
       className='bg-primary-base border-primary-base hover:text-primary-base h-auto w-auto rounded-md border-2 px-4 py-1.5 text-white hover:bg-white'
     >
-      Sign Up
+      <Link href='/auth/sign-up' type='button'>
+        Sign Up
+      </Link>
     </Button>
   </div>
 );
@@ -50,31 +54,27 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
 
   const _pop_up_menu = [
     {
-      name: 'Beranda',
-      onClick: () => router.push('/beranda'),
-      icon: <MdDashboard size={20} className='text-primary-base' />,
+      name: 'Akun',
+      onClick: () => router.push('/akun'),
+      icon: <FaRegUserCircle size={20} className='text-primary-base' />,
     },
     {
-      name: 'Profile',
+      name: 'Lowongan Saya',
       onClick: () => {
-        return router.push('/profile');
+        return router.push('/lowongan-saya');
       },
-      icon: <FaRegUserCircle size={20} className='text-warning-base' />,
+      icon: <IoDocumentTextOutline size={20} className='text-blue-600' />,
     },
+
     {
-      name: 'Administrasi',
-      icon: <FcDocument size={20} className='text-success-base' />,
-      onClick: () => router.push('/administrasi'),
+      name: 'Logout',
+      icon: <MdLogout size={20} className='text-red-600' />,
+      // onClick: async () => {
+      //   await logoutRequest({
+      //     refresh_token: data?.user?.token?.refresh_token as string,
+      //   });
+      // },
     },
-    // {
-    //   name: 'Logout',
-    //   icon: <MdLogout size={20} className='text-error-base' />,
-    //   onClick: async () => {
-    //     await logoutRequest({
-    //       refresh_token: data?.user?.token?.refresh_token as string,
-    //     });
-    //   },
-    // },
   ];
 
   const _bottom_nav_items = [
@@ -138,29 +138,29 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
     // avatar: profileData?.data.user.avatar as string,
     email: 'zulfiqinaza@gmail.com',
     full_name: 'Naza Zulfiqi',
-    avatar: '#',
+    avatar: '/images/stmik.png',
   };
 
   const _mobile_menu_item = [
     {
       name: 'Cari Lowongan',
-      icon: <MdFindInPage size={25} />,
-      href: '/panduan',
+      icon: <RiFileSearchLine size={20} />,
+      href: '/cari-lowongan',
     },
     {
       name: 'Cari Perusahaan',
-      icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
-      href: '/konsultasi-dan-layanan',
+      icon: <LucideBuilding size={20} />,
+      href: '/cari-perusahaan',
     },
     {
       name: 'Berita',
-      icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
-      href: '/konsultasi-dan-layanan',
+      icon: <LucideNewspaper size={20} />,
+      href: '/berita',
     },
     {
       name: 'Tentang Kami',
-      icon: <FaBuildingCircleCheck size={25} className='ms-1' />,
-      href: '/konsultasi-dan-layanan',
+      icon: <LucideSchool size={20} />,
+      href: '/tentan-kami',
     },
   ];
 

@@ -10,7 +10,7 @@ const CardNews: FC = () => {
           <div className='relative w-full'>
             <div className='absolute inset-0 h-full w-full rounded-md bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-50'></div>
             <Image
-              src='/images/news/news1.png'
+              src='/images/news/news2.jpeg'
               alt='image-article'
               width={0}
               height={0}

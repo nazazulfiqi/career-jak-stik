@@ -10,6 +10,7 @@ export const formFilterCompanySchema = z.object({
 
 export const formApplySchema = z.object({
 	resume: z.any().refine((file: any) => file?.name, "Please upload Resume"),
+	transkrip: z.any().refine((file: any) => file?.name, "Please upload Transkrip Nilai"),
 	fullname: z
 		.string({ required_error: "Fullname is Required" })
 		.min(5, { message: "Full name have min 5 characters" }),
@@ -18,6 +19,10 @@ export const formApplySchema = z.object({
 		.email({ message: "Email not valid" }),
 	phone: z.string().min(6, { message: "Phone have min 6 characters" }),
 	previousJobTitle: z.string(),
+	major: z.string({
+		required_error: "Major is required",
+	}),
+	ipk : z.string({required_error: "Ipk is required"}).min(1, { message: "Ipk is required" }),
 	linkedIn: z.string(),
 	portfolio: z.string(),
 	coverLetter: z.string(),

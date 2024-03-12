@@ -4,14 +4,14 @@ import React, { FC } from 'react';
 
 const RelatedNewsComponent: FC = () => {
   return (
-  <Link href='/news/1'>
+    <Link href='/news/1'>
       <section className='py-2'>
         <section className='flex items-center gap-2'>
           <Image
             width={20}
             height={20}
             sizes='30vw'
-            src='/images/news/news1.png'
+            src='/images/news/news2.jpeg'
             alt='Related Image Article'
             className='h-20 w-20 flex-shrink-0 rounded-md bg-blue-200 object-cover'
           />

@@ -50,6 +50,9 @@ export default {
         primary: {
           'base' : '#FFC107'
         },
+        hover: {
+          'base' : '#EAB308'
+        },
         secondary: {
           'base': '#CCCCF5'
         },

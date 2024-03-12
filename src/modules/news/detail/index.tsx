@@ -43,7 +43,7 @@ const DetailNewsModule: FC = () => {
                 </div>
                 <div className='max-h-[500px]  w-full overflow-hidden'>
                   <Image
-                    src='/images/news/news1.png'
+                    src='/images/news/news2.jpeg'
                     width={1000}
                     height={400}
                     alt='Detail Article Image'

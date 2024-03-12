@@ -98,7 +98,7 @@ export const NavbarMobileMenu: FC<TMobileMenuProps> = ({
           </section>
         </section>
       ) : null}
-      <section className='flex flex-col gap-y-4 border-b-[1px] border-neutral-200 pb-4'>
+      <section className='flex flex-col gap-y-6 border-b-[1px] border-neutral-200 px-1 pb-4'>
         {mobileitems.map((item, index) => {
           return (
             <Link
@@ -107,9 +107,7 @@ export const NavbarMobileMenu: FC<TMobileMenuProps> = ({
               className='flex items-center gap-2'
             >
               {item.icon}
-              <h1 className='text-sm font-bold text-neutral-700'>
-                {item.name}
-              </h1>
+              <h1 className='text-sm  text-neutral-700'>{item.name}</h1>
             </Link>
           );
         })}

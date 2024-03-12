@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { FC, Fragment, ReactElement, Suspense } from 'react';
 import { lazily } from 'react-lazily';
 
-import { LBottomNav, LTopNav } from './section';
+import { LTopNav } from './section';
 import { TNavbarProps } from './types';
 
 const { BottomNav, TopNav } = lazily(() => import('./section'));
@@ -27,11 +27,11 @@ export const Navbar: FC<TNavbarProps> = (props): ReactElement => {
           </Suspense>
         </div>
       </header>
-      {session && includesPath && (
+      {/* {session && includesPath && (
         <Suspense fallback={<LBottomNav />}>
           <BottomNav {...props} />
         </Suspense>
-      )}
+      )} */}
     </Fragment>
   );
 };

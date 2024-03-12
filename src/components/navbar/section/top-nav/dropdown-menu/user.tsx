@@ -82,7 +82,7 @@ export const NavbarUserMenu: FC<TNavbarUserProps> = ({
             >
               {icon}
               <button type='button'>
-                <h1 className='group:hover:text-neutral-100 text-center text-[12px] font-bold text-[#171717]'>
+                <h1 className='group:hover:text-neutral-100 text-center text-[12px]  text-[#171717]'>
                   {name}
                 </h1>
               </button>
