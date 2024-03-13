@@ -1,7 +1,9 @@
 import React from 'react';
 
+import PerusahaanMasukModule from '@/modules/perusahaan/sign-in';
+
 const PerusahaanSignInPage = () => {
-  return <div>PerusahaanSignInPage</div>;
+  return <PerusahaanMasukModule />;
 };
 
 export default PerusahaanSignInPage;
