@@ -53,9 +53,9 @@ const Sidebar: FC = () => {
               className='hover:text-primary-base w-full items-center  justify-start rounded-none'
               asChild
             >
-              <Link href='/job-listings'>
+              <Link href='/perusahaan/lowongan-pekerjaan'>
                 <HiOutlineClipboardDocumentList className='mr-2 text-lg' />
-                Job Listings
+                Lowongan Pekerjaan
               </Link>
             </Button>
             <Button

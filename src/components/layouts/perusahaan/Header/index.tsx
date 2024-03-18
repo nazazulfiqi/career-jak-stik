@@ -21,8 +21,8 @@ const Header: FC = () => {
           className='bg-primary-base hover:bg-hover-base rounded-none px-6 py-3'
           asChild
         >
-          <Link href='/post-a-job'>
-            <PlusIcon className='mr-2 h-4 w-4' /> Post a Job
+          <Link href='/perusahaan/posting-lowongan'>
+            <PlusIcon className='mr-2 h-4 w-4' /> Posting Lowongan
           </Link>
         </Button>
       </div>

@@ -2,8 +2,10 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 
 import AuthLayout from '@/components/layouts/auth';
@@ -18,15 +20,27 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
+import OtpModalModule from '@/modules/auth/otp-modal';
+import { modalOtp } from '@/recoil/atoms/auth-otp';
 import { formSignUpSchema } from '@/validations/form-schema';
 
 const SignUpModule: FC = () => {
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useRecoilState(modalOtp);
+
+  const [email, setEmail] = React.useState<string>('');
+
   const form = useForm<z.infer<typeof formSignUpSchema>>({
     resolver: zodResolver(formSignUpSchema),
   });
 
   const onSubmit = (values: z.infer<typeof formSignUpSchema>) => {
+    setEmail(values.email);
     console.log(values);
+
+    // router.push(`/auth/otp?email=${values.email}`);
+
+    setIsModalOpen(true);
   };
 
   return (
@@ -101,6 +115,7 @@ const SignUpModule: FC = () => {
           </div>
         </form>
       </Form>
+      <OtpModalModule email={email} />
     </AuthLayout>
   );
 };

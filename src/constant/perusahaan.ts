@@ -89,3 +89,41 @@ export const EMPLOYEE_OPTIONS: optionType[] = [
 		label: "1000-above",
 	},
 ];
+
+export const jobDetailData = {
+  id: 1,
+  title: "Software Engineer",
+  description: "<p>This is the description of the job.</p>",
+  responsibility: "<p>Responsibility of the job.</p>",
+  whoYouAre: "<p>Who you are for this job.</p>",
+  niceToHaves: "<p>Nice to have skills for this job.</p>",
+  applicants: 20,
+  needs: 50,
+  dueDate: "2024-04-30",
+  datePosted: "2024-03-15",
+  jobType: "Full-time",
+  salaryFrom: 50000,
+  salaryTo: 70000,
+  CategoryJob: {
+    id: 1,
+    name: "Engineering"
+  },
+  requiredSkills: ["JavaScript", "React", "Node.js"],
+  benefits: [
+    {
+      id: 1,
+      benefit: "Health Insurance",
+      description: "Health insurance coverage."
+    },
+    {
+      id: 2,
+      benefit: "Flexible Work Hours",
+      description: "Ability to choose your work hours."
+    },
+    {
+      id: 3,
+      benefit: "Remote Work",
+      description: "Option to work remotely."
+    }
+  ]
+};

@@ -199,11 +199,13 @@ const OverviewForm: FC = () => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {EMPLOYEE_OPTIONS.map((item: any) => (
-                            <SelectItem key={item.id} value={item.name}>
-                              {item.name}
-                            </SelectItem>
-                          ))}
+                          {EMPLOYEE_OPTIONS.map(
+                            (item: optionType, i: number) => (
+                              <SelectItem key={item.id + i} value={item.id}>
+                                {item.label}
+                              </SelectItem>
+                            )
+                          )}
                         </SelectContent>
                       </Select>
                       <FormMessage />

@@ -5,6 +5,8 @@ import React, { FC } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import OverviewForm from '@/modules/perusahaan/pengaturan/components/overview-form';
+import SocialMediaForm from '@/modules/perusahaan/pengaturan/components/socialmedia-form';
+import TeamForm from '@/modules/perusahaan/pengaturan/components/team-form';
 
 const PerusahaanPengaturanContent: FC = () => {
   return (
@@ -20,10 +22,10 @@ const PerusahaanPengaturanContent: FC = () => {
           <OverviewForm />
         </TabsContent>
         <TabsContent value='socialLinks'>
-          {/* <SocialMediaForm detail={company?.CompanySocialMedia[0]} /> */}
+          <SocialMediaForm />
         </TabsContent>
         <TabsContent value='teams'>
-          {/* <TeamForm teams={company?.CompanyTeam} /> */}
+          <TeamForm />
         </TabsContent>
       </Tabs>
     </section>

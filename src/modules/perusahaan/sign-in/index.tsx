@@ -85,7 +85,7 @@ const PerusahaanMasukModule: FC = () => {
               type='submit'
               className='bg-primary-base hover:bg-hover-base w-full'
               onClick={() => {
-                router.push('/perusahaans/dashboard');
+                router.push('/perusahaan/dashboard');
               }}
             >
               Sign In
