@@ -19,14 +19,13 @@ import {
 
 import { JOB_LISTINGS_COLUMNS } from '@/constant/perusahaan';
 
-const PerusahaanLowonganPekerjaanContent: FC = async () => {
-  const jobs = [
+const PerusahaanLowonganPekerjaanContent: FC = () => {
+  const jobs: any = [
     {
       roles: 'Software Engineer',
       jobType: 'Full-time',
       datePosted: new Date(),
       dueDate: new Date(),
-
       applicants: 1,
       needs: 10,
     },
