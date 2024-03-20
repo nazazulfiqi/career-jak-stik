@@ -22,12 +22,10 @@ function Provider({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
         <RecoilRoot>
-          {/* <NextUIProvider> */}
           <Suspense fallback={<LoadingDots hScreen={true} />}>
             {children}
             <Toaster />
           </Suspense>
-          {/* </NextUIProvider> */}
         </RecoilRoot>
       </SessionProvider>
     </QueryClientProvider>

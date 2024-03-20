@@ -2,12 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 
-import logger from '@/lib/logger';
+import { useOtpVerify } from '@/hooks/auth/hook';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
@@ -36,16 +37,30 @@ interface Props {
 const OtpModalModule: FC<Props> = ({ email }) => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalOtp);
 
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof authOTPSchema>>({
     resolver: zodResolver(authOTPSchema),
   });
 
+  const { mutate } = useOtpVerify();
+
   const onSubmit = (values: z.infer<typeof authOTPSchema>) => {
-    const data = {
-      email,
-      otp: values.otp,
-    };
-    logger(data);
+    mutate(
+      {
+        email,
+        otp: values.otp,
+      },
+      {
+        onSuccess: () => {
+          setIsModalOpen(false);
+          router.push('/auth/sign-in');
+        },
+        onError: (e) => {
+          console.log(e);
+        },
+      }
+    );
   };
 
   return (

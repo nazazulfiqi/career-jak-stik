@@ -8,6 +8,8 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 
+import { useRegister } from '@/hooks/auth/hook';
+
 import AuthLayout from '@/components/layouts/auth';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,13 +36,28 @@ const SignUpModule: FC = () => {
     resolver: zodResolver(formSignUpSchema),
   });
 
+  const { mutate } = useRegister();
+
   const onSubmit = (values: z.infer<typeof formSignUpSchema>) => {
+    const { name, email, password } = values;
     setEmail(values.email);
-    console.log(values);
 
-    // router.push(`/auth/otp?email=${values.email}`);
-
-    setIsModalOpen(true);
+    mutate(
+      {
+        name,
+        email,
+        password,
+        role: 'USER',
+      },
+      {
+        onSuccess: () => {
+          setIsModalOpen(true);
+        },
+        onError: (e) => {
+          console.log(e);
+        },
+      }
+    );  
   };
 
   return (
