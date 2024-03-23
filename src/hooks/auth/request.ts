@@ -1,9 +1,17 @@
-import { EMAIL_VERIFICATION_VERIFY, REGISTER } from "@/lib/endpoints/authentications";
+import { EMAIL_VERIFICATION_VERIFY, LOGIN, REGISTER } from "@/lib/endpoints/authentications";
 import { TMetaItem } from "@/lib/types";
 
 import { api } from '../../config/api/apiConfig';
 
-import { TOTPPayload, TRegisterPayload } from "@/types/authentications";
+import { TLoginPayload, TLoginResponse, TOTPPayload, TRegisterPayload } from "@/types/authentications";
+
+
+export const loginRequest = async (
+  payload: TLoginPayload
+): Promise<TLoginResponse> => {
+  const data = await api.post<TLoginResponse>(LOGIN, payload);
+  return data.data;
+};
 
 export const registerRequest = async (
   payload: TRegisterPayload

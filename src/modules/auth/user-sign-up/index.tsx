@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
@@ -11,6 +10,7 @@ import { z } from 'zod';
 import { useRegister } from '@/hooks/auth/hook';
 
 import AuthLayout from '@/components/layouts/auth';
+import ButtonLoading from '@/components/organisms/LoadingButton';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -21,13 +21,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 
 import OtpModalModule from '@/modules/auth/otp-modal';
+import OtpModalSuccess from '@/modules/auth/otp-modal/modal-success';
 import { modalOtp } from '@/recoil/atoms/auth-otp';
 import { formSignUpSchema } from '@/validations/form-schema';
 
 const SignUpModule: FC = () => {
-  const router = useRouter();
+  const { toast } = useToast();
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalOtp);
 
   const [email, setEmail] = React.useState<string>('');
@@ -36,7 +38,7 @@ const SignUpModule: FC = () => {
     resolver: zodResolver(formSignUpSchema),
   });
 
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const onSubmit = (values: z.infer<typeof formSignUpSchema>) => {
     const { name, email, password } = values;
@@ -51,13 +53,21 @@ const SignUpModule: FC = () => {
       },
       {
         onSuccess: () => {
+          toast({
+            title: 'Berhasil',
+            description:
+              'Akun berhasil dibuat, silahkan cek email untuk aktivasi',
+          });
           setIsModalOpen(true);
         },
         onError: (e) => {
-          console.log(e);
+          toast({
+            title: 'Gagal',
+            description: 'Email sudah terdaftar',
+          });
         },
       }
-    );  
+    );
   };
 
   return (
@@ -68,6 +78,7 @@ const SignUpModule: FC = () => {
           Silahkan isi data berikut untuk melakukan pendaftaran
         </p>
       </div>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5'>
           <FormField
@@ -114,12 +125,16 @@ const SignUpModule: FC = () => {
             )}
           />
 
-          <Button
-            type='submit'
-            className='bg-primary-base hover:bg-hover-base w-full'
-          >
-            Sign Up
-          </Button>
+          {isPending ? (
+            <ButtonLoading className='bg-primary-base w-full cursor-not-allowed' />
+          ) : (
+            <Button
+              type='submit'
+              className='bg-primary-base hover:bg-hover-base w-full'
+            >
+              Sign Up
+            </Button>
+          )}
 
           <div className='mt-6 text-sm'>
             Already have an account?{' '}
@@ -133,6 +148,7 @@ const SignUpModule: FC = () => {
         </form>
       </Form>
       <OtpModalModule email={email} />
+      <OtpModalSuccess />
     </AuthLayout>
   );
 };

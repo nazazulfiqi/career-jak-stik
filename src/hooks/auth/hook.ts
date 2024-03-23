@@ -1,10 +1,21 @@
 import { useMutation,UseMutationResult } from "@tanstack/react-query";
 
 import { TMetaErrorResponse, TMetaItem } from "@/lib/types";
-import { otpVerifyRequest, registerRequest } from "@/hooks/auth/request";
+import { loginRequest, otpVerifyRequest, registerRequest } from "@/hooks/auth/request";
 
-import { TOTPPayload, TRegisterPayload } from "@/types/authentications";
+import { TLoginPayload, TLoginResponse, TOTPPayload, TRegisterPayload } from "@/types/authentications";
 
+export const useLogin = (): UseMutationResult<
+  TLoginResponse,
+  TMetaErrorResponse,
+  TLoginPayload,
+  null
+> => {
+  return useMutation({
+    mutationKey: ['login-user'],
+    mutationFn: (params) => loginRequest(params),
+  });
+};
 
 export const useRegister = (): UseMutationResult<
   TMetaItem,

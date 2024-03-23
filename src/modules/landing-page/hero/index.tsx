@@ -1,8 +1,13 @@
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import FormSearch from '@/components/organisms/FormSearch';
 
 const HeroSection = () => {
+  const { data: session } = useSession();
+
+  console.log(session);
+
   return (
     <div className='mx-auto -mt-12 flex h-screen max-w-[1440px] flex-row items-center justify-between overflow-hidden'>
       <div className='w-full px-8 py-12 text-center md:px-14 lg:px-16 2xl:px-0'>

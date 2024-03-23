@@ -4,7 +4,7 @@
 import { LucideBuilding, LucideNewspaper, LucideSchool } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { FC, Fragment, ReactElement } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { IoDocumentTextOutline } from 'react-icons/io5';
@@ -14,6 +14,7 @@ import { RiFileSearchLine } from 'react-icons/ri';
 import { Navbar } from '@/components/navbar/navbar';
 import { LayoutFooter } from '@/components/organisms/footer';
 import { Button } from '@/components/ui/button';
+import { Toaster } from '@/components/ui/toaster';
 
 import { CareerPlanIcon } from './assets/icons/ic-career-plan';
 import { ConsultationIcon } from './assets/icons/ic-consultation';
@@ -59,9 +60,9 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
       icon: <FaRegUserCircle size={20} className='text-primary-base' />,
     },
     {
-      name: 'Lowongan Saya',
+      name: 'Lamaran Saya',
       onClick: () => {
-        return router.push('/lowongan-saya');
+        return router.push('/lamaran-saya');
       },
       icon: <IoDocumentTextOutline size={20} className='text-blue-600' />,
     },
@@ -69,11 +70,9 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
     {
       name: 'Logout',
       icon: <MdLogout size={20} className='text-red-600' />,
-      // onClick: async () => {
-      //   await logoutRequest({
-      //     refresh_token: data?.user?.token?.refresh_token as string,
-      //   });
-      // },
+      onClick: async () => {
+        await signOut();
+      },
     },
   ];
 
@@ -183,6 +182,7 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
         withSearch={addSearch}
       />
       <section className='flex h-full flex-col'>{children}</section>
+      <Toaster />
       <LayoutFooter />
     </Fragment>
   );

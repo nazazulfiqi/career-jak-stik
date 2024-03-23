@@ -1,0 +1,1 @@
+export const USER_PROFILE = 'v1/users/profile';

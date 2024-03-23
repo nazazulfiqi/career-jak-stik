@@ -2,6 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { FC, ReactElement } from 'react';
 import Avatar from 'react-avatar';
+import { MdArrowDropDown } from 'react-icons/md';
 
 import { TNavbarUserProps } from './types';
 
@@ -10,15 +11,15 @@ export const NavbarUserMenu: FC<TNavbarUserProps> = ({
   userData,
 }): ReactElement => {
   return (
-    <Menu as='div' className='z-50 hidden h-9 w-9 lg:inline-block'>
+    <Menu as='div' className='z-50 hidden h-12 w-16 lg:inline-block'>
       <Menu.Button>
-        <div className='group  flex h-9 w-9  cursor-pointer items-center justify-center overflow-hidden rounded-md bg-neutral-100'>
+        <div className='group  flex h-12 w-16  cursor-pointer items-center justify-center overflow-hidden rounded-md bg-transparent'>
           {userData?.avatar ? (
             <Image
               src={userData.avatar || '/profile-avatar-example.svg'}
               alt='user avatar'
-              width={36}
-              height={36}
+              width={56}
+              height={56}
               className='flex h-9 w-9  items-center justify-center bg-white bg-center font-[700]  text-neutral-600'
             />
           ) : (
@@ -26,9 +27,13 @@ export const NavbarUserMenu: FC<TNavbarUserProps> = ({
               name={userData?.full_name}
               color='#F26800'
               className=' h-[36px] w-[36px] rounded-md'
-              size='36'
+              size='26'
             />
           )}
+          <MdArrowDropDown
+            className='bg-transparent text-neutral-400'
+            size={36}
+          />
         </div>
       </Menu.Button>
 

@@ -8,19 +8,22 @@ import { formApplySchema } from '@/validations/form-schema';
 
 interface UploadFieldProps {
   form: UseFormReturn<z.infer<typeof formApplySchema>>;
+  file?: any;
 }
 
-const UploadField: FC<UploadFieldProps> = ({ form }) => {
+const UploadField: FC<UploadFieldProps> = ({ form, file }) => {
+  console.log(file);
+
   const inputRef = useRef<HTMLInputElement>(null);
-  const [nameFile, SetNameFile] = useState<string>('Attach Resume / CV');
+  const [nameFile, setNameFile] = useState<string>('Attach Resume / CV');
 
   const handleSelectFile = () => {
     inputRef.current?.click();
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      SetNameFile(e.target.files[0].name);
+    if (e.target.files && e.target.files[0]) {
+      setNameFile(e.target.files[0].name);
       form.setValue('resume', e.target.files[0]);
     }
   };
@@ -32,9 +35,10 @@ const UploadField: FC<UploadFieldProps> = ({ form }) => {
         <div>
           <div
             onClick={handleSelectFile}
-            className='text-primary border-primary cursor-pointer border-2 border-dashed p-3 text-center text-xs font-semibold'
+            className='text-primary-base border-primary-base cursor-pointer border-2 border-dashed p-3 text-center text-xs font-semibold'
           >
-            {nameFile}
+            {file === null && nameFile === '' ? 'Attach resume' : ''}
+            {file !== null && nameFile !== '' ? file : ''}
           </div>
         </div>
         <FormField

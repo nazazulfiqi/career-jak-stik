@@ -134,5 +134,8 @@ export default {
     },
   },
   darkMode: 'class',
-  plugins: [],
+  plugins: [
+
+    require('tailwindcss-animate'),
+  ],
 } satisfies Config;
