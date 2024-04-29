@@ -10,28 +10,26 @@ interface InputBenefitsProps {
 }
 
 const InputBenefits: FC<InputBenefitsProps> = ({ form }) => {
-  const [benefits, setBenefits] = useState<any[]>([]);
+  const [benefit, setBenefit] = useState<any[]>([]);
 
   const deleteBenefit = (item: any) => {
-    const deletedBenefits = benefits?.filter(
-      (benefit: any) => benefit !== item
-    );
-    setBenefits([...(deletedBenefits || [])]);
-    form.setValue('benefits', deletedBenefits);
+    const deletedBenefit = benefit?.filter((benefit: any) => benefit !== item);
+    setBenefit([...(deletedBenefit || [])]);
+    form.setValue('benefit', deletedBenefit);
   };
 
-  const updateBenefits = (item: any) => {
-    const newValue: any[] = [...benefits, item];
+  const updateBenefit = (item: any) => {
+    const newValue: any[] = [...benefit, item];
 
-    setBenefits(newValue);
-    form.setValue('benefits', newValue);
+    setBenefit(newValue);
+    form.setValue('benefit', newValue);
   };
 
   return (
     <div className='block'>
-      <DialogAddBenefits updateBenefits={updateBenefits} />
+      <DialogAddBenefits updateBenefit={updateBenefit} />
       <div className='mt-5 grid grid-cols-3 gap-5'>
-        {benefits?.map((item: any, i: number) => (
+        {benefit?.map((item: any, i: number) => (
           <div
             className='relative w-[200px] rounded-sm border border-gray-200 p-3'
             key={i}
@@ -40,8 +38,8 @@ const InputBenefits: FC<InputBenefitsProps> = ({ form }) => {
             <div className='absolute right-2 top-2 cursor-pointer'>
               <X className='h=6 w-6' onClick={() => deleteBenefit(item)} />
             </div>
-            <div className='mb-3 text-xl font-semibold'>{item.benefit}</div>
-            <div className='text-sm text-gray-500'>{item.description}</div>
+            <div className='mb-3 text-xl font-semibold'>{item}</div>{' '}
+            {/* Update here */}
           </div>
         ))}
       </div>

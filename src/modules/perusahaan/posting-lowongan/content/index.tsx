@@ -9,6 +9,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useCreateJob, useGetJobCategory } from '@/hooks/perusahaan/jobs/hook';
+
 import TitleForm from '@/components/atoms/title-form';
 import CKEditor from '@/components/organisms/CKEditor';
 import FieldInput from '@/components/organisms/FieldInput';
@@ -39,23 +41,10 @@ import { useToast } from '@/components/ui/use-toast';
 import { JOBTYPES } from '@/constant/perusahaan';
 import { jobFormSchema } from '@/validations/perusahaan/form-schema';
 
-const PostingLowonganContent: FC = () => {
-  const data = [
-    {
-      id: 1,
-      name: 'Full Time',
-    },
-    {
-      id: 2,
-      name: 'Part Time',
-    },
-    {
-      id: 3,
-      name: 'Freelance',
-    },
-  ];
+import { TCreateJobPayload } from '@/types/jobs';
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const PostingLowonganContent: FC = () => {
+  const [isLoadComponent, setIsLoadComponent] = useState<boolean>(false);
 
   const { data: session } = useSession();
   const router = useRouter();
@@ -69,8 +58,46 @@ const PostingLowonganContent: FC = () => {
     // },
   });
 
+  const { data, isLoading } = useGetJobCategory();
+
+  const { mutate } = useCreateJob();
+
   const onSubmit = async (val: z.infer<typeof jobFormSchema>) => {
-    console.log(val);
+    try {
+      const payload: TCreateJobPayload = {
+        title: val.title,
+        category: val.category,
+        jobType: val.jobType,
+        salaryFrom: val.salaryFrom,
+        salaryTo: val.salaryTo,
+        skills: val.skills,
+        description: val.description,
+        responsibility: val.responsibility,
+        benefit: val.benefit,
+      };
+
+      await mutate(payload, {
+        onSuccess: () => {
+          router.push('/perusahaan/dashboard');
+
+          toast({
+            title: 'Job Posted',
+            description: 'Your job has been successfully posted.',
+          });
+        },
+        onError: (error) => {
+          console.error('Error submitting form:', error);
+
+          toast({
+            title: 'Error',
+            description:
+              'An error occurred while posting the job. Please try again later.',
+          });
+        },
+      });
+    } catch (error) {
+      console.error('Unexpected error submitting form:', error);
+    }
   };
 
   useEffect(() => {
@@ -106,7 +133,7 @@ const PostingLowonganContent: FC = () => {
           >
             <FormField
               control={form.control}
-              name='roles'
+              name='title'
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -202,7 +229,7 @@ const PostingLowonganContent: FC = () => {
           >
             <FormField
               control={form.control}
-              name='categoryId'
+              name='category'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Select Job Categories</FormLabel>
@@ -221,8 +248,8 @@ const PostingLowonganContent: FC = () => {
                           <Loader2 className='h-4 w-4 animate-spin' />
                         </SelectItem>
                       ) : (
-                        data?.map((item: any, i: number) => (
-                          <SelectItem value={item.id} key={item.id}>
+                        data?.data?.map((item: any, i: number) => (
+                          <SelectItem value={item.name} key={i}>
                             {item.name}
                           </SelectItem>
                         ))
@@ -240,7 +267,7 @@ const PostingLowonganContent: FC = () => {
             title='Required Skills'
             subtitle='Add required skill for the job.'
           >
-            <InputSkills form={form} label='Add Skills' name='requiredSkills' />
+            <InputSkills form={form} label='Add Skills' name='skills' />
           </FieldInput>
 
           <FieldInput
@@ -249,7 +276,7 @@ const PostingLowonganContent: FC = () => {
           >
             <CKEditor
               form={form}
-              name='jobDescription'
+              name='description'
               editorLoaded={editorLoaded}
             />
           </FieldInput>
@@ -261,28 +288,6 @@ const PostingLowonganContent: FC = () => {
             <CKEditor
               form={form}
               name='responsibility'
-              editorLoaded={editorLoaded}
-            />
-          </FieldInput>
-
-          <FieldInput
-            title='Who You Are'
-            subtitle='Add your preferred candidate qualifications.'
-          >
-            <CKEditor
-              form={form}
-              name='whoYouAre'
-              editorLoaded={editorLoaded}
-            />
-          </FieldInput>
-
-          <FieldInput
-            title='Nice-To-Haves'
-            subtitle='Add nice-to-have skills and qualifications for the role to encourage a more diverse set of candidates to apply.'
-          >
-            <CKEditor
-              form={form}
-              name='niceToHaves'
               editorLoaded={editorLoaded}
             />
           </FieldInput>

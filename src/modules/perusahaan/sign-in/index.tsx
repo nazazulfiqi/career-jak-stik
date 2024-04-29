@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/components/ui/use-toast';
 
 import { formSignInSchema } from '@/validations/form-schema';
@@ -132,7 +133,7 @@ const PerusahaanMasukModule: FC = () => {
           </form>
         </Form>
       </div>
-      {/* <Toaster /> */}
+      <Toaster />
     </div>
   );
 };

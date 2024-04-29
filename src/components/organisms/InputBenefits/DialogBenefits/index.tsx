@@ -6,7 +6,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -14,27 +13,21 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 
 interface DialogAddBenefitsProps {
-  updateBenefits: (item: any) => void;
+  updateBenefit: (item: any) => void;
 }
 
-const DialogAddBenefits: FC<DialogAddBenefitsProps> = ({ updateBenefits }) => {
+const DialogAddBenefits: FC<DialogAddBenefitsProps> = ({ updateBenefit }) => {
   const benefitRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSaveBenefit = () => {
     const benefit = benefitRef.current?.value;
-    const description = descriptionRef.current?.value;
 
-    if (benefit === '' || description === '') {
+    if (benefit === '') {
       return;
     }
-    updateBenefits({
-      benefit: benefit,
-      description: description,
-    });
+    updateBenefit(benefit);
   };
 
   return (
@@ -48,29 +41,16 @@ const DialogAddBenefits: FC<DialogAddBenefitsProps> = ({ updateBenefits }) => {
       <DialogContent className='sm:max-w-md'>
         <DialogHeader>
           <DialogTitle>Add Benefit</DialogTitle>
-          <DialogDescription>
-            Make a new benefit, clicks save when your done
-          </DialogDescription>
         </DialogHeader>
-        <div className='mb-5 space-y-8'>
-          <div>
-            <Label htmlFor='benefit'>Benefit</Label>
-            <Input
-              id='benefit'
-              ref={benefitRef}
-              placeholder='fill your benefits...'
-            />
-          </div>
-          <div>
-            <Label htmlFor='benefit'>Description</Label>
-            <Textarea
-              id='description'
-              ref={descriptionRef}
-              placeholder='fill your description...'
-            />
-          </div>
+        <div className='mb-5'>
+          <Label htmlFor='benefit'>Benefit</Label>
+          <Input
+            id='benefit'
+            ref={benefitRef}
+            placeholder='fill your benefits...'
+          />
         </div>
-        <DialogFooter className='sm:justify-start'>
+        <DialogFooter>
           <DialogClose asChild>
             <Button type='button' onClick={handleSaveBenefit}>
               Save

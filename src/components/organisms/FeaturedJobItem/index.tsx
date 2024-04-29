@@ -3,36 +3,49 @@ import React, { FC } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 
-import { JobType } from '@/types';
-
-type JobItemProps = JobType;
+type JobItemProps = {
+  id: string;
+  categoryId: string;
+  userId: string;
+  title: string;
+  jobType: string;
+  skills: string[];
+  companyName: string;
+  location: any;
+};
 
 const JobItem: FC<JobItemProps> = ({
-  desc,
-  image,
+  id,
+  categoryId,
+  userId,
+  title,
   jobType,
-  location,
-  name,
-  type,
   skills,
+  companyName,
+  location,
 }) => {
   const maxSkillsToShow = 2;
   return (
     <div className='border-border cursor-pointer border p-6'>
       <div className='flex flex-row items-start justify-between'>
-        <Image src={image} alt={image} width={48} height={48} />
+        <Image
+          src='/images/stmik.png'
+          alt='Company Logo'
+          width={48}
+          height={48}
+        />
         <span className='text-primary border-primary rounded border px-4 py-1 text-xs font-semibold'>
           {jobType}
         </span>
       </div>
       <div className='my-4'>
-        <div className='text-lg font-semibold'>{name}</div>
+        <div className='text-lg font-semibold'>{title}</div>
         <div className='text-muted-foreground mb-3'>
-          {type} . {location}
+          {companyName} . {location}
         </div>
         <div
           className='text-muted-foreground line-clamp-2 h-12 text-ellipsis'
-          dangerouslySetInnerHTML={{ __html: desc }}
+          dangerouslySetInnerHTML={{ __html: title }}
         ></div>
       </div>
       <div className='space-x-2'>
