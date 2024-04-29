@@ -35,7 +35,8 @@ const UploadTranscript: FC<UploadFieldProps> = ({ form, file }) => {
             onClick={handleSelectFile}
             className='text-primary-base border-primary-base cursor-pointer border-2 border-dashed p-3 text-center text-xs font-semibold'
           >
-            {file || 'Attach transcript' || nameFile}
+            {file === null && nameFile === '' ? 'Attach resume' : ''}
+            {file !== null && nameFile !== '' ? file : ''}
           </div>
         </div>
         <FormField

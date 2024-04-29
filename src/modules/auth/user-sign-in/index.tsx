@@ -42,7 +42,6 @@ const SignInModule: FC = () => {
         password: values.password,
         redirect: false,
       });
-      5;
 
       if (response?.error !== null) {
         toast({

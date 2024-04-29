@@ -2,12 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { FC } from 'react';
+import { signIn } from 'next-auth/react';
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import ButtonLoading from '@/components/organisms/LoadingButton';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -18,18 +19,48 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 
 import { formSignInSchema } from '@/validations/form-schema';
 
 const PerusahaanMasukModule: FC = () => {
   const router = useRouter();
 
+  const { toast } = useToast();
+
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSignInSchema>>({
     resolver: zodResolver(formSignInSchema),
   });
 
-  const onSubmit = (values: z.infer<typeof formSignInSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSignInSchema>) => {
+    setLoading(true);
+    try {
+      const response = await signIn('login', {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+
+      console.log(response);
+
+      if (response?.error !== null) {
+        toast({
+          title: 'Gagal',
+          description: response?.error,
+        });
+      } else {
+        toast({
+          title: 'Berhasil',
+          description: 'Anda berhasil masuk!',
+        });
+        router.push('/perusahaan/dashboard');
+      }
+    } catch (error) {
+      return null;
+    }
+    setLoading(false);
   };
 
   return (
@@ -81,25 +112,27 @@ const PerusahaanMasukModule: FC = () => {
               )}
             />
 
-            <Button
-              type='submit'
-              className='bg-primary-base hover:bg-hover-base w-full'
-              onClick={() => {
-                router.push('/perusahaan/dashboard');
-              }}
-            >
-              Sign In
-            </Button>
+            {loading ? (
+              <ButtonLoading className='w-full' />
+            ) : (
+              <Button
+                type='submit'
+                className='bg-primary-base hover:bg-hover-base w-full'
+              >
+                Sign In
+              </Button>
+            )}
 
-            <div className='mt-6 text-sm '>
+            {/* <div className='mt-6 text-sm '>
               Don`t have an account{' '}
               <Link href='#' className='text-primary-base font-medium'>
                 Sign Up
               </Link>
-            </div>
+            </div> */}
           </form>
         </Form>
       </div>
+      {/* <Toaster /> */}
     </div>
   );
 };
