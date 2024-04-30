@@ -5,6 +5,8 @@ import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useGetAllJob } from '@/hooks/jobs/hook';
+
 import { BreadCrumb } from '@/components/atoms/bread-crumb';
 import { BaseLayout } from '@/components/layouts/base/base';
 import ExploreDataContainer from '@/containers/ExploreDataContainers';
@@ -85,18 +87,21 @@ const LowonganModule: FC = () => {
     // Add more job entries as needed
   ];
 
+  const { data, isLoading } = useGetAllJob();
+
   return (
     <BaseLayout>
       <BreadCrumb items={jobsBC} />
+
       <ExploreDataContainer
         formFilter={formFilter}
         onSubmitFilter={onSubmitFormFilter}
         filterForms={filters}
         title='dream jobs'
-        loading={false}
+        loading={isLoading}
         subtitle='Find your dream job with our job search engine.'
         type='job'
-        data={jobData}
+        data={data?.data || []}
       />
     </BaseLayout>
   );

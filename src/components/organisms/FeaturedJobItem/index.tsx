@@ -1,20 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { FC } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 
-type JobItemProps = {
-  id: string;
-  categoryId: string;
-  userId: string;
-  title: string;
-  jobType: string;
-  skills: string[];
-  companyName: string;
-  location: any;
-};
+import { TGetAllJob } from '@/types/jobs';
 
-const JobItem: FC<JobItemProps> = ({
+const JobItem: FC<TGetAllJob> = ({
   id,
   categoryId,
   userId,
@@ -26,7 +18,10 @@ const JobItem: FC<JobItemProps> = ({
 }) => {
   const maxSkillsToShow = 2;
   return (
-    <div className='border-border cursor-pointer border p-6'>
+    <Link
+      href={`/cari-lowongan/${id}`}
+      className='border-border cursor-pointer border p-6'
+    >
       <div className='flex flex-row items-start justify-between'>
         <Image
           src='/images/stmik.png'
@@ -59,7 +54,7 @@ const JobItem: FC<JobItemProps> = ({
           </Badge>
         ))}
       </div>
-    </div>
+    </Link>
   );
 };
 

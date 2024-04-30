@@ -11,8 +11,6 @@ import { TGetAllJob } from '@/types/jobs';
 const FeaturedJobSection = () => {
   const { data, isLoading } = useGetAllJob();
 
-  console.log(data);
-
   return (
     <section className='text-neutrals-700 mb-12 bg-white'>
       <div className='mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-8 pt-12 md:px-14 lg:px-16 2xl:px-0'>

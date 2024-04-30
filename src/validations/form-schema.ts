@@ -24,7 +24,6 @@ export const formApplySchema = z.object({
 });
 
 
-
 export const formSignInSchema = z.object({
 	email: z
 		.string({ required_error: "Email is requied" })

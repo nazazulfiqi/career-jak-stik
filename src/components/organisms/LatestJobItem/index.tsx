@@ -1,31 +1,40 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { FC } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 
-import { JobType } from '@/types';
+import { TGetAllJob } from '@/types/jobs';
 
-type JobItemProps = JobType;
-
-const JobItem: FC<JobItemProps> = ({
-  image,
+const JobItem: FC<TGetAllJob> = ({
+  id,
+  categoryId,
+  userId,
+  title,
   jobType,
-  location,
-  name,
-  type,
   skills,
+  companyName,
+  location,
 }) => {
   const maxSkillsToShow = 1;
   return (
-    <div className='border-border flex cursor-pointer flex-row items-start gap-6 border p-8'>
+    <Link
+      href={`/cari-lowongan/${id}`}
+      className='border-border flex cursor-pointer flex-row items-start gap-6 border p-8'
+    >
       <div>
-        <Image src={image} alt={image} width={64} height={64} />
+        <Image
+          src='/images/stmik.png'
+          alt='Company Logo'
+          width={64}
+          height={64}
+        />
       </div>
       <div>
-        <div className='text-lg font-semibold'>{name}</div>
+        <div className='text-lg font-semibold'>{title}</div>
         <div className='text-muted-foreground mb-2 text-sm'>
-          {type} . {location}
+          {jobType} . {location}
         </div>
         <div className='inline-flex h-5 items-center gap-2'>
           <Badge variant='secondary'>{jobType}</Badge>
@@ -41,7 +50,7 @@ const JobItem: FC<JobItemProps> = ({
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
