@@ -11,7 +11,6 @@ import CompanyCard from '@/modules/company/components/CompanyCard';
 import JobCard from '@/modules/jobs/components/JobCard';
 
 import { filterFormType } from '@/types';
-import { TGetAllJob } from '@/types/jobs';
 
 interface ExploreDataContainerProps {
   formFilter: any;
@@ -20,7 +19,7 @@ interface ExploreDataContainerProps {
   loading: boolean;
   title: string;
   subtitle: string;
-  data: TGetAllJob[];
+  data: any[];
   type: 'job' | 'company';
 }
 
