@@ -1,7 +1,9 @@
+'use client';
 import React, { FC } from 'react';
 
 import Header from '@/components/layouts/perusahaan/Header';
 import Sidebar from '@/components/layouts/perusahaan/Sidebar';
+import { Toaster } from '@/components/ui/toaster';
 
 interface Props {
   children: React.ReactNode;
@@ -23,6 +25,7 @@ const PerusahaanLayout: FC<Props> = ({ children }) => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

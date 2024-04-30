@@ -78,12 +78,11 @@ const PostingLowonganContent: FC = () => {
 
       await mutate(payload, {
         onSuccess: () => {
-          router.push('/perusahaan/dashboard');
-
           toast({
             title: 'Job Posted',
             description: 'Your job has been successfully posted.',
           });
+          router.push('/perusahaan/dashboard');
         },
         onError: (error) => {
           console.error('Error submitting form:', error);
