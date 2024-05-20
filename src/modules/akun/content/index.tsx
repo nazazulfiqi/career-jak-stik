@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 import { z } from 'zod';
@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { useUpdateUserProfile } from '@/hooks/account/hook';
 
 import LoadingDots from '@/components/atoms/LoadingDots';
+import ButtonLoading from '@/components/organisms/LoadingButton';
 import UploadField from '@/components/organisms/UploadField';
 import Uploadtranscript from '@/components/organisms/UploadTranskrip';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -27,7 +28,7 @@ import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 
-import { formApplySchema } from '@/validations/form-schema';
+import { updateProfileSchema } from '@/validations/form-schema';
 
 import { TUserDetailResponse } from '@/types/account';
 
@@ -42,9 +43,10 @@ const EditProfilContent: FC<EditProfilContentProps> = ({ data, isLoading }) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { mutate, isPending } = useUpdateUserProfile();
+  const [loading, setLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formApplySchema>>({
-    resolver: zodResolver(formApplySchema),
+  const form = useForm<z.infer<typeof updateProfileSchema>>({
+    resolver: zodResolver(updateProfileSchema),
     defaultValues: {
       name: data?.data?.name,
       email: data?.data?.email,
@@ -61,7 +63,8 @@ const EditProfilContent: FC<EditProfilContentProps> = ({ data, isLoading }) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formApplySchema>) => {
+  const onSubmit = (values: z.infer<typeof updateProfileSchema>) => {
+    setLoading(true);
     const formData = new FormData();
     formData.append('name', values.name);
     formData.append('phoneNumber', values.phoneNumber);
@@ -82,6 +85,7 @@ const EditProfilContent: FC<EditProfilContentProps> = ({ data, isLoading }) => {
 
     mutate(formData, {
       onSuccess: () => {
+        setLoading(false);
         queryClient.invalidateQueries(['get-user-me'] as any);
         toast({
           title: 'Berhasil',
@@ -89,6 +93,7 @@ const EditProfilContent: FC<EditProfilContentProps> = ({ data, isLoading }) => {
         });
       },
       onError: (e) => {
+        setLoading(false);
         console.log(e);
       },
     });
@@ -289,12 +294,16 @@ const EditProfilContent: FC<EditProfilContentProps> = ({ data, isLoading }) => {
 
               <Uploadtranscript form={form} file={data.data.transcript} />
 
-              <Button
-                type='submit'
-                className='bg-primary-base hover:bg-hover-base w-full'
-              >
-                Simpan
-              </Button>
+              {loading ? (
+                <ButtonLoading className='w-full' />
+              ) : (
+                <Button
+                  type='submit'
+                  className='bg-primary-base hover:bg-hover-base w-full'
+                >
+                  Submit
+                </Button>
+              )}
             </form>
           </Form>
         )}

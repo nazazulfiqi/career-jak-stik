@@ -60,6 +60,7 @@ export const authOptions: NextAuthOptions = {
         token.refresh_token = account.refresh_token;
       } else if (account?.provider === 'login' && currentUser) {
         token.access_token = currentUser.data.accessToken;
+
         currentUser.name = user.name;
         currentUser.email = user.email;
         token.user_id = currentUser.data.user_id;
@@ -71,7 +72,7 @@ export const authOptions: NextAuthOptions = {
       if (decodedToken) {
         // Access the decoded token's payload
         token.role = decodedToken?.role;
-        console.log(token.role);
+        // console.log(token.role);
         
       } else {
         console.error('Failed to decode access token');

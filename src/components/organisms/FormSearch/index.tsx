@@ -25,7 +25,7 @@ const FormSearch: FC = () => {
         <Button
           // href='/auth/register'
           type='button'
-          className='bg-primary-base border-primary-base hover:text-primary mx-auto h-auto w-auto rounded-md border-2 px-12 py-2 text-white hover:bg-white'
+          className='bg-primary-base border-primary-base hover:text-primary hover:bg-hover-base mx-auto h-auto w-auto rounded-md border-2 px-12 py-2 text-white'
         >
           Search my job
         </Button>

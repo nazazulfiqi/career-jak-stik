@@ -8,7 +8,7 @@ export const formFilterCompanySchema = z.object({
 	industry: z.array(z.string()),
 });
 
-export const formApplySchema = z.object({
+export const updateProfileSchema = z.object({
   resume: z.optional(z.any()),
   transcript: z.optional(z.any()),
   name: z.string({ required_error: "Fullname is Required" }).min(5, { message: "Full name have min 5 characters" }),

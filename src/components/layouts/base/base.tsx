@@ -11,6 +11,8 @@ import { IoDocumentTextOutline } from 'react-icons/io5';
 import { MdLogout } from 'react-icons/md';
 import { RiFileSearchLine } from 'react-icons/ri';
 
+import { useProfile } from '@/hooks/account/hook';
+
 import { Navbar } from '@/components/navbar/navbar';
 import { LayoutFooter } from '@/components/organisms/footer';
 import { Button } from '@/components/ui/button';
@@ -130,14 +132,17 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
     '/nilai-dan-sertifikat',
   ];
 
-  // const { data: profileData } = useProfile();
+  const { data: profileData } = useProfile();
+
+  // console.log(profileData);
+
   const _profile_user = {
-    // email: profileData?.data?.user?.email as string,
-    // full_name: profileData?.data?.user?.full_name as string,
-    // avatar: profileData?.data.user.avatar as string,
-    email: 'zulfiqinaza@gmail.com',
-    full_name: 'Naza Zulfiqi',
-    avatar: '/images/stmik.png',
+    email: profileData?.data?.email as string,
+    full_name: profileData?.data?.name as string,
+    avatar: null,
+    // email: 'zulfiqinaza@gmail.com',
+    // full_name: 'Naza Zulfiqi',
+    // avatar: '/images/stmik.png',
   };
 
   const _mobile_menu_item = [
