@@ -4,10 +4,10 @@ import { z } from 'zod';
 
 import { FormField, FormItem, FormMessage } from '@/components/ui/form';
 
-import { formApplySchema } from '@/validations/form-schema';
+import { updateProfileSchema } from '@/validations/form-schema';
 
 interface UploadFieldProps {
-  form: UseFormReturn<z.infer<typeof formApplySchema>>;
+  form: UseFormReturn<z.infer<typeof updateProfileSchema>>;
   file?: any;
 }
 
