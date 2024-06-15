@@ -1,0 +1,1 @@
+export const COMPANY_SETTING = 'v1/companies/profile';

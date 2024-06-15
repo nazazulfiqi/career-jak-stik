@@ -48,13 +48,30 @@ import {
 } from '@/constant/perusahaan';
 import { overviewFormSchema } from '@/validations/perusahaan/form-schema';
 
-const OverviewForm: FC = () => {
+import { TCompanyProfileItem } from '@/types/perusahaan/setting';
+
+interface CompanySettingProps {
+  data: TCompanyProfileItem;
+  isLoading: boolean;
+}
+
+const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
+  console.log(data);
+
   const { toast } = useToast();
   const router = useRouter();
 
   const [editorLoaded, setEditorLoaded] = useState<boolean>(false);
   const form = useForm<z.infer<typeof overviewFormSchema>>({
     resolver: zodResolver(overviewFormSchema),
+    defaultValues: {
+      name: data?.name,
+      description: data?.about === null ? '' : data?.about,
+      location: 'Singapura',
+      employeeTotal: '51-150',
+      industry: 'Technology',
+      techStack: ['React', 'NextJS', 'TailwindCSS'],
+    },
   });
 
   const onSubmit = (values: z.infer<typeof overviewFormSchema>) => {
@@ -132,12 +149,17 @@ const OverviewForm: FC = () => {
                   <FormItem>
                     <FormLabel>Location</FormLabel>
                     <Select
+                      value={field.value}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger className='w-[450px]'>
-                          <SelectValue placeholder='Location' />
+                          <SelectValue placeholder='Location'>
+                            {LOCATION_OPTIONS.find(
+                              (option) => option.label === field.value
+                            )?.label || 'Select Location'}
+                          </SelectValue>
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -156,17 +178,22 @@ const OverviewForm: FC = () => {
               <div className='grid w-[450px] grid-cols-2 gap-4'>
                 <FormField
                   control={form.control}
-                  name='employee'
+                  name='employeeTotal'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Employee</FormLabel>
                       <Select
+                        value={field.value}
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder='Employee' />
+                            <SelectValue placeholder='Employee'>
+                              {EMPLOYEE_OPTIONS.find(
+                                (option) => option.label === field.value
+                              )?.label || 'Select Employee'}
+                            </SelectValue>
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
