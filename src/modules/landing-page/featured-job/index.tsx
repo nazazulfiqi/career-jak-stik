@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
@@ -18,10 +19,13 @@ const FeaturedJobSection = () => {
           <h1 className='mb-2 text-5xl font-bold leading-tight'>
             Cari <span className='text-primary-base'>lowongan</span> terbaik
           </h1>
-          <div className='text-primary-base hidden items-center gap-2 md:flex'>
-            <p>Lihat semua berita</p>
+          <Link
+            href='/cari-lowongan'
+            className='text-primary-base hidden items-center gap-2 md:flex'
+          >
+            <p>Lihat lowongan terbaik</p>
             <FaArrowRight />
-          </div>
+          </Link>
         </div>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4'>
           {isLoading ? (
@@ -34,10 +38,13 @@ const FeaturedJobSection = () => {
             ))
           )}
         </div>
-        <div className='text-primary-base flex items-center gap-2 md:hidden'>
-          <p>Lihat semua berita</p>
+        <Link
+          href='/cari-lowongan'
+          className='text-primary-base flex items-center gap-2 md:hidden'
+        >
+          <p>Lihat lowongan terbaik</p>
           <FaArrowRight />
-        </div>
+        </Link>
       </div>
     </section>
   );

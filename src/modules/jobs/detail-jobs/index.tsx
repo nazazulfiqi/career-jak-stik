@@ -16,6 +16,8 @@ const DetailLowonganModule: FC = () => {
 
   console.log(params);
 
+  const { data, isLoading } = useGetDetailJob(String(params.id));
+
   const detailJobsBC = [
     {
       name: 'Beranda',
@@ -26,16 +28,14 @@ const DetailLowonganModule: FC = () => {
       link: '/cari-lowongan',
     },
     {
-      name: 'STMIK Jakarta',
-      link: '/cari-perusahaan/1',
+      name: 'Detail Perusahaan',
+      link: `/cari-perusahaan/${data?.data.userId}`,
     },
     {
       name: 'Detail Lowongan',
       link: '/cari-lowongan/1',
     },
   ];
-
-  const { data, isLoading } = useGetDetailJob(String(params.id));
 
   return (
     <BaseLayout>

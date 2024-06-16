@@ -1,11 +1,5 @@
 'use client';
 
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TwitterIcon,
-} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
@@ -17,11 +11,18 @@ import {
 } from 'react-icons/hi';
 
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 
 import LatestJobSection from '@/modules/landing-page/latest-job';
 
-const DetailPerusahaanContent: FC = () => {
+import { TCompanyDetailItem } from '@/types/company';
+
+interface DetailPerusahaanProps {
+  data: TCompanyDetailItem;
+}
+
+const DetailPerusahaanContent: FC<DetailPerusahaanProps> = ({ data }) => {
+  console.log('detail', data);
+
   return (
     <section className='mx-auto w-full max-w-[1440px] bg-white px-8 py-4 md:px-14 lg:px-16  2xl:px-0'>
       <div className=''>
@@ -34,9 +35,7 @@ const DetailPerusahaanContent: FC = () => {
           />
           <div>
             <div className='inline-flex items-center gap-4'>
-              <span className='text-4xl font-semibold'>
-                STMIK Jakarta STI&K
-              </span>
+              <span className='text-4xl font-semibold'>{data?.name}</span>
               <Badge>20 Jobs</Badge>
             </div>
             <div className='mt-2'>
@@ -53,7 +52,9 @@ const DetailPerusahaanContent: FC = () => {
                 </div>
                 <div>
                   <div className='text-gray-500'>Founded</div>
-                  <div className='font-semibold'>Mar, 10 2024</div>
+                  <div className='font-semibold'>
+                    {data.dateFounded ? data.dateFounded : '-'}
+                  </div>
                 </div>
               </div>
               <div className='inline-flex items-center gap-3'>
@@ -64,7 +65,9 @@ const DetailPerusahaanContent: FC = () => {
                 </div>
                 <div>
                   <div className='text-gray-500'>Employees</div>
-                  <div className='font-semibold'>100 - 200</div>
+                  <div className='font-semibold'>
+                    {data.employeeTotal ? data.employeeTotal : '-'}
+                  </div>
                 </div>
               </div>
               <div className='inline-flex items-center gap-3'>
@@ -75,7 +78,9 @@ const DetailPerusahaanContent: FC = () => {
                 </div>
                 <div>
                   <div className='text-gray-500'>Location</div>
-                  <div className='font-semibold'>Indonesia</div>
+                  <div className='font-semibold'>
+                    {data.location ? data.location : '-'}
+                  </div>
                 </div>
               </div>
               <div className='inline-flex items-center gap-3'>
@@ -86,7 +91,9 @@ const DetailPerusahaanContent: FC = () => {
                 </div>
                 <div>
                   <div className='text-gray-500'>Industry</div>
-                  <div className='font-semibold'>Education</div>
+                  <div className='font-semibold'>
+                    {data.industry ? data.industry : '-'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -97,14 +104,16 @@ const DetailPerusahaanContent: FC = () => {
           <div className='w-3/4'>
             <div className='mb-16'>
               <div className='mb-3 text-3xl font-semibold'>Company Profile</div>
-              <div className='text-muted-foreground'>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
-                ipsum iste modi vero eum, porro eos? Maxime, et? Corrupti
-                accusamus rerum odio est nulla qui doloremque, dolorum magni
-                temporibus! Fugit.
-              </div>
+              <div
+                className='text-black'
+                dangerouslySetInnerHTML={{
+                  __html: data.about
+                    ? data.about
+                    : 'Deskripsi Tidak Ditampilkan',
+                }}
+              ></div>
             </div>
-            {/* {data.CompanySocialMedia && ( */}
+            {/* {data.CompanySocialMedia && (
             <div>
               <div className='mb-4 text-3xl font-semibold'>Contact</div>
               <div className='flex w-[400px] flex-wrap items-center gap-5'>
@@ -122,22 +131,28 @@ const DetailPerusahaanContent: FC = () => {
                 </div>
               </div>
             </div>
-            {/* )} */}
+            )} */}
           </div>
           <div className='w-1/4'>
             <div className='mb-4 text-3xl font-semibold'>Tech Stack</div>
             <div className='text-sm text-gray-500'>
               Learn about the technology and tools that Pattern uses.
             </div>
-            <div className='mt-5 flex flex-row flex-wrap items-center gap-4'>
-              {[0, 1, 2].map((i: number) => (
-                <Badge key={i}>javascript</Badge>
-              ))}
-            </div>
+            {data?.techStack && data.techStack.length > 0 ? (
+              <div className='mt-5 flex flex-row flex-wrap items-center gap-4'>
+                {data.techStack.map((i: string) => (
+                  <Badge key={i}>{i}</Badge>
+                ))}
+              </div>
+            ) : (
+              <div className='mt-5 text-sm text-black'>
+                Tech Stack Tidak Ditampilkan
+              </div>
+            )}
           </div>
         </div>
 
-        <div className=''>
+        {/* <div className=''>
           <Separator />
           <div className='my-16'>
             <div className='mb-4 text-3xl font-semibold'>Teams</div>
@@ -164,7 +179,7 @@ const DetailPerusahaanContent: FC = () => {
             </div>
           </div>
           <Separator />
-        </div>
+        </div> */}
         <LatestJobSection />
       </div>
     </section>

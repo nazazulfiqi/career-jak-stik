@@ -10,3 +10,4 @@ export const companyProfileGetRequest = async (): Promise<TCompanyProfileRespons
   const { data } = await api.get(COMPANY_SETTING);
   return data;
 };
+

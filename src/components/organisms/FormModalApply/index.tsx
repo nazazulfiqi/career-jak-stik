@@ -10,6 +10,7 @@ import { useProfile } from '@/hooks/account/hook';
 import { useApplyJob } from '@/hooks/jobs/hook';
 
 import ButtonLoading from '@/components/organisms/LoadingButton';
+import UploadResumeJob from '@/components/organisms/UploadResumeJob';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
@@ -26,6 +27,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 
 import { applyJobSchema } from '@/validations/lowongan/apply-job';
+
+import { TApplyJobPayload } from '@/types/jobs';
 
 interface FormModalApplyProps {
   image: string | undefined;
@@ -53,10 +56,11 @@ const FormModalApply: FC<FormModalApplyProps> = ({
       name: data?.data?.name,
       email: data?.data?.email,
       phoneNumber: data?.data?.phoneNumber as string,
-      previousJob: data?.data?.latestJob as string,
+      latestJob: data?.data?.latestJob as string,
       linkedInUrl: data?.data?.linkedInUrl as string,
       portofolioUrl: data?.data?.portofolioUrl as string,
-      additionalInform: data?.data?.addInformation as string,
+      addInformation: data?.data?.addInformation as string,
+      resume: data?.data?.resume as string,
     },
   });
 
@@ -71,13 +75,14 @@ const FormModalApply: FC<FormModalApplyProps> = ({
       name: val.name,
       email: val.email,
       phoneNumber: val.phoneNumber,
-      previousJob: val.previousJob,
+      latestJob: val.latestJob,
       linkedInUrl: val.linkedInUrl,
       portofolioUrl: val.portofolioUrl,
-      additionalInform: val.additionalInform,
+      addInformation: val.addInformation,
+      resume: val.resume,
     };
 
-    mutate(payload, {
+    mutate(payload as TApplyJobPayload, {
       onSettled: () => {
         setLoading(false);
         setDialogOpen(false);
@@ -166,7 +171,7 @@ const FormModalApply: FC<FormModalApplyProps> = ({
                 />
                 <FormField
                   control={form.control}
-                  name='previousJob'
+                  name='latestJob'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Current of previous job title</FormLabel>
@@ -223,7 +228,7 @@ const FormModalApply: FC<FormModalApplyProps> = ({
 
               <FormField
                 control={form.control}
-                name='additionalInform'
+                name='addInformation'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Additional Information</FormLabel>
@@ -238,7 +243,7 @@ const FormModalApply: FC<FormModalApplyProps> = ({
                 )}
               />
 
-              {/* <UploadField form={form} /> */}
+              <UploadResumeJob form={form} file={data?.data.resume} />
 
               {loading ? (
                 <ButtonLoading className='w-full' />

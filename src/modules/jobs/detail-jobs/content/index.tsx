@@ -117,7 +117,7 @@ const DetailLowonganContent: FC<{ data: TGetDetailJob }> = ({ data }) => {
           <div className='w-full'>
             <div className='text-3xl font-semibold'>Required Skills</div>
             <div className='my-10 inline-flex flex-wrap gap-4'>
-              {data.skills.map((item: string, i: number) => (
+              {data?.skills?.map((item: string, i: number) => (
                 <Badge variant='outline' key={item + i}>
                   {item}
                 </Badge>
@@ -137,7 +137,7 @@ const DetailLowonganContent: FC<{ data: TGetDetailJob }> = ({ data }) => {
         </div>
 
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5'>
-          {data.benefit.map((item: string, i: number) => (
+          {data?.benefit?.map((item: string, i: number) => (
             <div key={i}>
               <BiCategory className='text-primary h-12 w-12' />
               <div className='mt-6 text-xl font-semibold'>Benefit {i + 1}</div>

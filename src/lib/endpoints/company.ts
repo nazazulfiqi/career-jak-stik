@@ -1,0 +1,1 @@
+export const COMPANY = 'v1/companies';

@@ -14,13 +14,13 @@ export const updateProfileSchema = z.object({
   name: z.string({ required_error: "Fullname is Required" }).min(5, { message: "Full name have min 5 characters" }),
   email: z.string({ required_error: "Email is required" }).email({ message: "Email not valid" }),
   phoneNumber: z.string().min(6, { message: "Phone have min 6 characters" }),
-  latestJob: z.string(),
-  major: z.string({ required_error: "Major is required" }),
+  latestJob: z.string({ required_error: "Latest Job is required" }).min(2, { message: "Latest Job have min 2 characters" }),
+  major: z.string({ required_error: "Major is required" }).min(2, { message: "Major have min 2 characters" }),
   gpa: z.string({ required_error: "Ipk is required" }).min(1, { message: "Ipk is required" }),
-  linkedInUrl: z.string(),
-  portofolioUrl: z.string(),
-  addInformation: z.string(),
-  address: z.string(),
+  linkedInUrl: z.string({ required_error: "LinkedIn Url is required" }).min(5, { message: "LinkedIn Url have min 5 characters" }),
+  portofolioUrl: z.string({ required_error: "Portofolio Url is required" }).min(5, { message: "Portofolio Url have min 5 characters" }),
+  addInformation: z.string({ required_error: "Add Information is required" }).min(5, { message: "Add Information have min 5 characters" }),
+  address: z.string({ required_error: "Address is required" }).min(5, { message: "Address have min 5 characters" }),
 });
 
 

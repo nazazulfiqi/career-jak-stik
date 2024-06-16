@@ -60,10 +60,11 @@ export type TApplyJobPayload = {
   name: string
   email: string
   phoneNumber: string
-  previousJob: string
+  latestJob: string
   linkedInUrl: string
   portofolioUrl: string
-  additionalInform: string
+  addInformation: string
+  resume: File | null | string
 }
 
 export type TApplyJobResponse = {
