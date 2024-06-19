@@ -57,36 +57,6 @@ const LowonganModule: FC = () => {
     },
   ];
 
-  const jobData = [
-    {
-      id: '1',
-      image: '/images/stmik.png',
-      jobType: 'Full-time',
-      name: 'Software Engineer',
-      type: 'Engineering',
-      location: 'San Francisco, CA',
-      desc: 'We are looking for a skilled software engineer to join our dynamic team.',
-      category: 'Technology',
-      needs: 3,
-      applicants: 10,
-      skills: ['JavaScript', 'React', 'Node.js'],
-    },
-    {
-      id: '2',
-      image: '/images/stmik.png',
-      jobType: 'Part-time',
-      name: 'Graphic Designer',
-      type: 'Design',
-      location: 'New York, NY',
-      desc: 'Join our design team and create visually stunning graphics for our projects.',
-      category: 'Design',
-      needs: 2,
-      applicants: 5,
-      skills: ['Adobe Photoshop', 'Illustrator', 'UI/UX Design'],
-    },
-    // Add more job entries as needed
-  ];
-
   const { data, isLoading } = useGetAllJob();
 
   return (

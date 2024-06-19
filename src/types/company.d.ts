@@ -1,3 +1,4 @@
+import { TMetaResponse } from "@/lib/types"
 
 export type TCompanyDetailItem = {
   id: string
@@ -12,3 +13,4 @@ export type TCompanyDetailItem = {
 }
 
 export type TCompanyDetailResponse = TMetaResponseSingle<TCompanyDetailItem>
+export type TAllCompanyResponse = TMetaResponse<TCompanyDetailItem>

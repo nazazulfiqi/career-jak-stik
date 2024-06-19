@@ -4,17 +4,14 @@ import React, { FC } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 
-import { CompanyType } from '@/types';
+import { TCompanyDetailItem } from '@/types/company';
 
-type CompanyCardProps = CompanyType;
-
-const CompanyCard: FC<CompanyCardProps> = ({
+const CompanyCard: FC<TCompanyDetailItem> = ({
   industry,
-  description,
-  image,
+  about,
   name,
-  totalJobs,
   id,
+  location,
 }) => {
   const router = useRouter();
 
@@ -24,18 +21,27 @@ const CompanyCard: FC<CompanyCardProps> = ({
       className='border-border cursor-pointer border p-6'
     >
       <div className='flex flex-row items-start justify-between'>
-        <Image src={image} alt={image} width={66} height={66} />
-        <Badge>{totalJobs} Jobs</Badge>
+        <Image
+          src='/images/stmik.png'
+          alt='Company Logo'
+          width={66}
+          height={66}
+        />
+        <Badge>{location ? location : 'Indonesia'}</Badge>
       </div>
       <div className='my-4'>
         <div className='mb-2 text-lg font-semibold'>{name}</div>
         <div
           className='text-muted-foreground line-clamp-3 text-sm'
-          dangerouslySetInnerHTML={{ __html: description }}
+          dangerouslySetInnerHTML={{
+            __html: about ? about : 'Deskripsi tidak ditampilkan',
+          }}
         ></div>
       </div>
       <div className='space-x-2'>
-        <Badge variant='outline'>{industry}</Badge>
+        <Badge variant='outline'>
+          {industry ? industry : 'Industri tidak ditentukan'}
+        </Badge>
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useGetAllCompany } from '@/hooks/company/hook';
+
 import { BreadCrumb } from '@/components/atoms/bread-crumb';
 import { BaseLayout } from '@/components/layouts/base/base';
 import ExploreDataContainer from '@/containers/ExploreDataContainers';
@@ -55,61 +57,7 @@ const PerusahaanModule: FC = () => {
     },
   ];
 
-  const companyData = [
-    {
-      id: '1',
-      image: '/images/stmik.png',
-      name: 'TechCo',
-      totalJobs: 50,
-      description:
-        'A leading technology company specializing in software development.',
-      website: 'https://www.techco.com',
-      location: 'San Francisco, CA',
-      industry: 'Technology',
-      employee: '5000+',
-      dateFounded: new Date('2000-01-01'),
-      techStack: ['JavaScript', 'Python', 'Java', 'React'],
-      sosmed: {
-        twitter: 'https://twitter.com/techco',
-        linkedin: 'https://www.linkedin.com/company/techco',
-        facebook: 'https://www.facebook.com/techco',
-      },
-      teams: [
-        {
-          name: 'Development',
-          members: ['John Doe', 'Jane Smith', 'Bob Johnson'],
-        },
-        { name: 'Design', members: ['Alice Brown', 'Charlie Davis'] },
-      ],
-    },
-    {
-      id: '2',
-      image: '/images/stmik.png',
-      name: 'DesignHub',
-      totalJobs: 20,
-      description:
-        'A creative design agency passionate about creating unique and impactful designs.',
-      website: 'https://www.designhub.com',
-      location: 'New York, NY',
-      industry: 'Design',
-      employee: '200+',
-      dateFounded: new Date('2012-05-15'),
-      techStack: ['Adobe Creative Suite', 'Figma', 'Sketch', 'Illustrator'],
-      sosmed: {
-        twitter: 'https://twitter.com/designhub',
-        linkedin: 'https://www.linkedin.com/company/designhub',
-        instagram: 'https://www.instagram.com/designhub',
-      },
-      teams: [
-        {
-          name: 'Graphic Design',
-          members: ['Eva Green', 'Sam Wilson', 'Olivia Martinez'],
-        },
-        { name: 'UI/UX Design', members: ['Alex Turner', 'Sophie White'] },
-      ],
-    },
-    // Add more company entries as needed
-  ];
+  const { data, isLoading } = useGetAllCompany();
 
   return (
     <BaseLayout>
@@ -119,10 +67,10 @@ const PerusahaanModule: FC = () => {
         onSubmitFilter={onSubmit}
         filterForms={filters}
         title='dream company'
-        loading={false}
+        loading={isLoading}
         subtitle='Explore our list of companies that are looking for talent.'
         type='company'
-        data={companyData}
+        data={data?.data || []}
       />
     </BaseLayout>
   );
