@@ -19,7 +19,7 @@ export const jobFormSchema = z.object({
 export const overviewFormSchema = z.object({
 	image: z.any(),
 	name: z.string({ required_error: "Name is required" }),
-	website: z.string({ required_error: "Website is required" }),
+	link: z.string({ required_error: "Website is required" }),
 	location: z.string({ required_error: "Location is required" }),
 	employeeTotal: z.string({ required_error: "Employee is required" }),
 	industry: z.string({ required_error: "Industry is required" }),
@@ -28,7 +28,7 @@ export const overviewFormSchema = z.object({
 		.string({ required_error: "Tech Stack is required" })
 		.array()
 		.nonempty({ message: "Tech Stack must be at least 1 data" }),
-	description: z.string({ required_error: "Description is required" }),
+	about: z.string({ required_error: "Description is required" }),
 });
 
 export const socialMediaFormSchema = z.object({

@@ -1,13 +1,13 @@
-import { useQuery,UseQueryResult } from "@tanstack/react-query";
+import { useMutation, UseMutationResult, useQuery,UseQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 
 import { TMetaErrorResponse } from "@/lib/types";
-import { companyProfileGetRequest } from "@/hooks/perusahaan/setting/request";
+import { companyProfileGetRequest, companyUpdateProfileRequest } from "@/hooks/perusahaan/setting/request";
 
 import { companySettingState } from "@/recoil/atoms/perusahaan/setting";
 
-import { TCompanyProfileResponse, TuseCompanySettingData } from "@/types/perusahaan/setting";
+import { TCompanyProfilePayload, TCompanyProfileResponse, TuseCompanySettingData } from "@/types/perusahaan/setting";
 
 
 export const useCompanySetting = (): UseQueryResult<
@@ -19,6 +19,17 @@ export const useCompanySetting = (): UseQueryResult<
     enabled: !!session,
     queryKey: ['get-company-setting'],
     queryFn: async () => await companyProfileGetRequest(),
+  });
+};
+
+export const useUpdateCompanyProfile = (): UseMutationResult<
+TCompanyProfilePayload,
+  TMetaErrorResponse,
+  unknown
+> => {
+  return useMutation({
+    mutationKey: ['update-user-profile'],
+    mutationFn: async (payload) => await companyUpdateProfileRequest(payload),
   });
 };
 

@@ -7,7 +7,7 @@ export type optionType = {
 
 export const JOBTYPES: EnumValues = ['Full Time', 'Part Time', 'Remote', 'Internship']
 
-export const JOB_LISTINGS_COLUMNS: string[] = ['Roles', 'Status', 'Date Posted', 'Due Date', 'Job Type', 'Applicants', 'Needs']
+export const JOB_LISTINGS_COLUMNS: string[] = ['Posisi', 'Salary From', 'Salary To' ,'Tipe Lowongan'];
 
 export const JOB_LISTINGS_DATA = [
     {

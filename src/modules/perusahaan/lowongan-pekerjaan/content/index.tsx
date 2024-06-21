@@ -1,9 +1,8 @@
-import { MoreVertical } from 'lucide-react';
-import moment from 'moment';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import { MdOutlineLaunch } from 'react-icons/md';
 
-import { dateFormat } from '@/lib/helper';
+import { formatCurrency } from '@/lib/helper/formatCurrency';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -19,7 +18,17 @@ import {
 
 import { JOB_LISTINGS_COLUMNS } from '@/constant/perusahaan';
 
-const PerusahaanLowonganPekerjaanContent: FC = () => {
+import { TGetAllJobCompanyItem } from '@/types/perusahaan/lowongan';
+
+interface AllJobCompanyProps {
+  data: TGetAllJobCompanyItem[]; // menambahkan prop isLoading dengan tipe boolean
+}
+
+const PerusahaanLowonganPekerjaanContent: FC<AllJobCompanyProps> = ({
+  data,
+}) => {
+  console.log(data);
+
   const jobs: any = [
     {
       roles: 'Software Engineer',
@@ -41,33 +50,31 @@ const PerusahaanLowonganPekerjaanContent: FC = () => {
               {JOB_LISTINGS_COLUMNS.map((item: string, i: number) => (
                 <TableHead key={i}>{item}</TableHead>
               ))}
-              <TableHead>Action</TableHead>
+              <TableHead>Detail</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {jobs?.map((item: any, i: number) => (
-              <TableRow key={item.roles + 1}>
-                <TableCell>{item.roles}</TableCell>
-                <TableCell>
+            {data?.map((item: any, i: number) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.title}</TableCell>
+                {/* <TableCell>
                   {moment(item.datePosted).isBefore(item.dueDate) ? (
                     <Badge>Live</Badge>
                   ) : (
                     <Badge variant='destructive'>Expirerd</Badge>
                   )}
-                </TableCell>
-                <TableCell>{dateFormat(item.datePosted)}</TableCell>
-                <TableCell>{dateFormat(item.dueDate)}</TableCell>
+                </TableCell> */}
+                {/* <TableCell>{dateFormat(item.datePosted)}</TableCell>
+                <TableCell>{dateFormat(item.dueDate)}</TableCell> */}
+                <TableCell>{formatCurrency(item.salaryFrom)}</TableCell>
+                <TableCell>{formatCurrency(item.salaryTo)}</TableCell>
                 <TableCell>
                   <Badge variant='outline'>{item.jobType}</Badge>
                 </TableCell>
-                <TableCell>{item.applicants}</TableCell>
-                <TableCell>
-                  {item.applicants} / {item.needs}
-                </TableCell>
                 <TableCell>
                   <Button size='icon' variant='outline' asChild>
-                    <Link href={`job-listings/detail/${item.id}`}>
-                      <MoreVertical className='h-4 w-4' />
+                    <Link href={`lowongan-pekerjaan/${item.id}`}>
+                      <MdOutlineLaunch className='h-4 w-4' />
                     </Link>
                   </Button>
                 </TableCell>

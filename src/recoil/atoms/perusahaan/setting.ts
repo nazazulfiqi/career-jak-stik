@@ -15,6 +15,7 @@ export const companySettingState = atom<TCompanyProfileResponse>({
            employeeTotal: '',
           about: '',
           dateFounded: '',
+          link: '',
           industry: '',
           location: '',
           techStack: [],

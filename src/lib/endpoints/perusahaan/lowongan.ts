@@ -1,0 +1,1 @@
+export const ALL_JOB_COMPANY = 'v1/companies/jobs';

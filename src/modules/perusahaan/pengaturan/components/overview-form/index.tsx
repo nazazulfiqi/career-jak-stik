@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -9,12 +10,14 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { cn } from '@/lib/utils';
+import { useUpdateCompanyProfile } from '@/hooks/perusahaan/setting/hook';
 
 import TitleForm from '@/components/atoms/title-form';
 import CKEditor from '@/components/organisms/CKEditor';
 import CustomUpload from '@/components/organisms/CustomUpload';
 import FieldInput from '@/components/organisms/FieldInput';
 import InputSkills from '@/components/organisms/InputSkills';
+import ButtonLoading from '@/components/organisms/LoadingButton';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -58,6 +61,8 @@ interface CompanySettingProps {
 const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
   console.log(data);
 
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useUpdateCompanyProfile();
   const { toast } = useToast();
   const router = useRouter();
 
@@ -66,16 +71,40 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
     resolver: zodResolver(overviewFormSchema),
     defaultValues: {
       name: data?.name,
-      description: data?.about === null ? '' : data?.about,
-      location: 'Singapura',
-      employeeTotal: '51-150',
-      industry: 'Technology',
-      techStack: ['React', 'NextJS', 'TailwindCSS'],
+      about: data?.about === null ? '' : data?.about,
+      location: data?.location === null ? '' : data?.location,
+      employeeTotal: data?.employeeTotal === null ? '' : data?.employeeTotal,
+      industry: data?.industry === null ? '' : data?.industry,
+      techStack: data?.techStack === null ? [] : data?.techStack,
+      dateFounded: data?.dateFounded ? new Date(data.dateFounded) : undefined,
+      link: data?.link === null ? '' : data?.link,
     },
   });
 
   const onSubmit = (values: z.infer<typeof overviewFormSchema>) => {
-    console.log(values);
+    const payload = {
+      name: values.name,
+      location: values.location,
+      employeeTotal: values.employeeTotal,
+      industry: values.industry,
+      dateFounded: new Date(values.dateFounded).toISOString(),
+      techStack: values.techStack,
+      about: values.about,
+      link: values.link,
+    };
+
+    mutate(payload, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['get-company-setting'] as any);
+        toast({
+          title: 'Berhasil',
+          description: 'Akun berhasil diperbarui',
+        });
+      },
+      onError: (e) => {
+        console.log(e);
+      },
+    });
   };
 
   useEffect(() => {
@@ -126,7 +155,7 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
               />
               <FormField
                 control={form.control}
-                name='website'
+                name='link'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Website</FormLabel>
@@ -295,17 +324,17 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
             title='About Company'
             subtitle='Brief description for your company. URLs are hyperlinked.'
           >
-            <CKEditor
-              form={form}
-              name='description'
-              editorLoaded={editorLoaded}
-            />
+            <CKEditor form={form} name='about' editorLoaded={editorLoaded} />
           </FieldInput>
 
           <div className='flex justify-end'>
-            <Button size='lg' className='bg-primary-base hover:bg-hover-base'>
-              Save Changes
-            </Button>
+            {isPending ? (
+              <ButtonLoading size='lg' className='p-[22px]' />
+            ) : (
+              <Button size='lg' className='bg-primary-base hover:bg-hover-base'>
+                Save Changes
+              </Button>
+            )}
           </div>
         </form>
       </Form>

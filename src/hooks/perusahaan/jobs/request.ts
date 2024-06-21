@@ -1,9 +1,11 @@
 
 import { JOB, JOB_CATEGORY } from "@/lib/endpoints/jobs";
+import { ALL_JOB_COMPANY } from "@/lib/endpoints/perusahaan/lowongan";
 
 import { api } from '../../../config/api/apiConfig';
 
 import { TCategoryResponse, TCreateJobPayload, TCreateJobResponse } from "@/types/jobs";
+import { TGetAllJobCompanyResponse } from "@/types/perusahaan/lowongan";
 
 
 export const getJobCategoryRequest = async (): Promise<TCategoryResponse> => {
@@ -28,3 +30,12 @@ export const createJobRequest = async (
   })
   return data;
 };
+
+export const getAllJobByCompanyIdRequest = async (
+
+): Promise<TGetAllJobCompanyResponse> => {
+  const { data } = await api.get(
+    `${ALL_JOB_COMPANY}`
+  );
+  return data;
+}

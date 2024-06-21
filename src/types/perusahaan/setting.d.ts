@@ -11,9 +11,23 @@ export type TCompanyProfileItem = {
   dateFounded: any
   techStack: any[]
   about: any
+  link: string
+}
+
+export type TCompanyProfilePayload = {
+  name: string
+  email: string
+  location: any
+  employeeTotal: any
+  industry: any
+  dateFounded: any
+  techStack: any[]
+  about: any
+  link: string
 }
 
 export type TCompanyProfileResponse = TMetaResponseSingle<TCompanyProfileItem>
+
 
 
 export type TuseCompanySettingData = {
