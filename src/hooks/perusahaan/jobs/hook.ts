@@ -1,10 +1,13 @@
 import { useMutation, UseMutationResult, useQuery,UseQueryResult } from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
 
 import { TMetaErrorResponse } from "@/lib/types";
-import { createJobRequest, getAllJobByCompanyIdRequest, getJobCategoryRequest } from "@/hooks/perusahaan/jobs/request";
+import { createJobRequest, getAllApplicantByJobIdRequest, getAllJobByCompanyIdRequest, getJobCategoryRequest } from "@/hooks/perusahaan/jobs/request";
+
+import { applicantJobState } from "@/recoil/atoms/perusahaan/applicant-job";
 
 import { TCategoryResponse, TCreateJobPayload, TCreateJobResponse } from "@/types/jobs";
-import { TGetAllJobCompanyResponse } from "@/types/perusahaan/lowongan";
+import { TGetAllApplicantResponse, TGetAllJobCompanyResponse, TuseApplicantByJobIdData } from "@/types/perusahaan/lowongan";
 
 
 
@@ -34,3 +37,20 @@ export const useGetAllJobByCompanyId = (
     queryKey: ["all-job-company-get"],
     queryFn: async () => await getAllJobByCompanyIdRequest(),
   });
+
+
+  export const useGetAllApplicantByJobId = (
+  id: string
+  ): UseQueryResult<TGetAllApplicantResponse> =>
+    useQuery({
+      queryKey: ["all-applicant-by-job-id-get"],
+      queryFn: async () => await getAllApplicantByJobIdRequest(id),
+    });
+
+    export const useApplicantByJobIdState = (): TuseApplicantByJobIdData => {
+      const [get, set] = useRecoilState(applicantJobState);
+      return {
+        getApplicantByJobIdData: get,
+        setApplicantByJobIdData: (val) => set(val),
+      };
+    };

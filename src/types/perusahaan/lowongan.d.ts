@@ -16,3 +16,23 @@ export type TGetAllJobCompanyItem = {
 }
 
 export type TGetAllJobCompanyResponse = TMetaResponse<TGetAllJobCompanyItem>
+
+
+interface TGetAllApplicantItem {
+  id: string;
+  jobId: string;
+  userId: string;
+  name: string;
+  email: string;
+  status: string;
+  phoneNumber: string;
+  resume: string;
+}
+
+export type TGetAllApplicantResponse = TMetaResponse<TGetAllApplicantItem>
+
+
+export type TuseApplicantByJobIdData = {
+  getApplicantByJobIdData: TGetAllApplicantResponse;
+  setApplicantByJobIdData: (val: TGetAllApplicantResponse) => void;
+};

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { FC } from 'react';
 import { MdClose, MdDone } from 'react-icons/md';
 
@@ -13,8 +14,10 @@ import {
 
 import { JOB_APPLICANTS_COLUMNS } from '@/constant/perusahaan';
 
+import { TGetAllApplicantItem } from '@/types/perusahaan/lowongan';
+
 interface ApplicantsProps {
-  applicants: any;
+  applicants: TGetAllApplicantItem[];
 }
 
 const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
@@ -47,12 +50,20 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
       <TableBody>
         {applicants && (
           <>
-            {applicants?.map((item: any, i: number) => (
+            {applicants?.map((item: TGetAllApplicantItem) => (
               <TableRow key={item.id + 1}>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.previousJobTitle}</TableCell>
-                <TableCell>{item.phone}</TableCell>
-                <TableCell>{item.resume}</TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>{item.phoneNumber}</TableCell>
+                <TableCell>
+                  <Link
+                    href={item.resume}
+                    className='text-primary-base'
+                    target='_blank'
+                  >
+                    Download Resume
+                  </Link>
+                </TableCell>
 
                 <TableCell className='flex gap-2'>
                   <Button

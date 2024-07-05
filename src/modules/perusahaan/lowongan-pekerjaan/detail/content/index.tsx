@@ -4,6 +4,8 @@ import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import React, { FC } from 'react';
 
+import { useApplicantByJobIdState } from '@/hooks/perusahaan/jobs/hook';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { jobDetailData } from '@/constant/perusahaan';
@@ -11,6 +13,13 @@ import Applicants from '@/modules/perusahaan/lowongan-pekerjaan/components/Appli
 import JobDetail from '@/modules/perusahaan/lowongan-pekerjaan/components/JobDetail';
 
 const LowonganPekerjaanDetailContent: FC = () => {
+  const { getApplicantByJobIdData, setApplicantByJobIdData } =
+    useApplicantByJobIdState();
+
+  const applicantData = getApplicantByJobIdData?.data;
+
+  console.log(applicantData);
+
   const applicant = [
     {
       id: 1,
@@ -43,7 +52,7 @@ const LowonganPekerjaanDetailContent: FC = () => {
           <TabsTrigger value='jobDetails'>Job Details</TabsTrigger>
         </TabsList>
         <TabsContent value='applicants'>
-          <Applicants applicants={applicant} />
+          <Applicants applicants={applicantData} />
         </TabsContent>
         <TabsContent value='jobDetails'>
           <JobDetail detail={jobDetailData} />

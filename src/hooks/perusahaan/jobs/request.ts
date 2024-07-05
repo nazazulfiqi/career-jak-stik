@@ -1,11 +1,12 @@
 
+
 import { JOB, JOB_CATEGORY } from "@/lib/endpoints/jobs";
-import { ALL_JOB_COMPANY } from "@/lib/endpoints/perusahaan/lowongan";
+import { ALL_APPLICANT_BY_JOB_ID, ALL_JOB_COMPANY } from "@/lib/endpoints/perusahaan/lowongan";
 
 import { api } from '../../../config/api/apiConfig';
 
 import { TCategoryResponse, TCreateJobPayload, TCreateJobResponse } from "@/types/jobs";
-import { TGetAllJobCompanyResponse } from "@/types/perusahaan/lowongan";
+import { TGetAllApplicantResponse, TGetAllJobCompanyResponse } from "@/types/perusahaan/lowongan";
 
 
 export const getJobCategoryRequest = async (): Promise<TCategoryResponse> => {
@@ -39,3 +40,11 @@ export const getAllJobByCompanyIdRequest = async (
   );
   return data;
 }
+
+export const getAllApplicantByJobIdRequest = async (id: string): Promise<TGetAllApplicantResponse> => {
+  const { data } = await api.get(
+    `${ALL_APPLICANT_BY_JOB_ID}/${id}`
+  );
+  return data;
+}
+

@@ -35,7 +35,7 @@ export const NEWS_DATA  = [
 	}
 ]
 
-export const JOB_APPLICANTS_COLUMNS:string[] = ['Nama', 'Posisi Sebelumnya', 'No.Telp', 'Resume']
+export const JOB_APPLICANTS_COLUMNS:string[] = ['Nama', 'Email', 'No.Telp', 'Resume']
 
 export const JOB_APPLICANTS_DATA = [
     {
