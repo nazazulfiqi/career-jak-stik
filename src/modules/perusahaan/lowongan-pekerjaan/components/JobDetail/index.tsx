@@ -1,22 +1,15 @@
-import { PartyPopper } from 'lucide-react';
 import React, { FC } from 'react';
+import { BiCategory } from 'react-icons/bi';
 
-import { dateFormat } from '@/lib/helper';
+import { formatCurrency } from '@/lib/helper/formatCurrency';
 
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 
-type JObDetailType = {
-  CategoryJob: any;
-};
+import { TGetDetailJob } from '@/types/jobs';
 
-interface JobDetailProps {
-  detail: any;
-}
-
-const JobDetail: FC<JobDetailProps> = ({ detail }) => {
-  const benefits: any = detail?.benefits;
+const JobDetail: FC<{ data: TGetDetailJob }> = ({ data }) => {
   return (
     <div>
       <div className='grid w-full grid-cols-3 gap-5'>
@@ -25,90 +18,66 @@ const JobDetail: FC<JobDetailProps> = ({ detail }) => {
             <div className='text-3xl font-semibold'>Description</div>
             <div
               className='mt-3 text-gray-800'
-              dangerouslySetInnerHTML={{ __html: detail?.description }}
+              dangerouslySetInnerHTML={{ __html: data?.description }}
             ></div>
           </div>
           <div>
-            <div className='text-3xl font-semibold'>Responsibilities</div>
+            <div className='mb-3 text-3xl font-semibold'>Responsibilities</div>
             <div
-              className='mt-3 text-gray-800'
-              dangerouslySetInnerHTML={{
-                __html: detail?.responsibility || '',
-              }}
-            ></div>
-          </div>
-          <div>
-            <div className='text-3xl font-semibold'>Who You Are</div>
-            <div
-              className='mt-3 text-gray-800'
-              dangerouslySetInnerHTML={{
-                __html: detail?.whoYouAre || '',
-              }}
-            ></div>
-          </div>
-          <div>
-            <div className='text-3xl font-semibold'>Nice-To-Haves</div>
-            <div
-              className='mt-3 text-gray-800'
-              dangerouslySetInnerHTML={{
-                __html: detail?.niceToHaves || '',
-              }}
+              className='text-muted-foreground'
+              dangerouslySetInnerHTML={{ __html: data?.responsibility }}
             ></div>
           </div>
         </div>
         <div>
           <div className='text-3xl font-semibold'>About this role</div>
 
-          <div className='my-6 bg-gray-100 p-3 text-center'>
-            {detail?.applicants}{' '}
-            <span className='text-gray-800'>of {detail?.needs} capacity</span>
-            <Progress
-              className='mt-3 bg-gray-200'
-              value={(detail?.applicants || 0) / (detail?.needs || 0) / 100}
-            />
+          <div className='mt-6 bg-slate-50 p-4'>
+            <div className='mb-2'>
+              <span className='font-semibold'>1 Applied</span>{' '}
+              <span className='text-gray-600'>of 10 capacity</span>
+            </div>
+            <Progress value={2} />
           </div>
 
-          <div className='mb-10 space-y-5'>
-            <div className='flex justify-between'>
-              <div className='text-gray-800'>Apply Before</div>
-              <div className='font-semibold'>{dateFormat(detail?.dueDate)}</div>
+          <div className='mt-6 space-y-4'>
+            <div className='flex flex-row justify-between'>
+              <div className='text-gray-500'>Apply Before</div>
+              <div className='font-semibold'>31 Mar 2024</div>
             </div>
-            <div className='flex justify-between'>
-              <div className='text-gray-800'>Job Post On</div>
+            <div className='flex flex-row justify-between'>
+              <div className='text-gray-500'>Job Posted On</div>
+              <div className='font-semibold'>31 Mar 2024</div>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <div className='text-gray-500'>Job Type</div>
+              <div className='font-semibold'>Fulltime</div>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <div className='text-gray-500'>Salary</div>
               <div className='font-semibold'>
-                {dateFormat(detail?.datePosted)}
+                {formatCurrency(Number(data.salaryFrom))} -{' '}
+                {formatCurrency(Number(data.salaryTo))}
               </div>
             </div>
-            <div className='flex justify-between'>
-              <div className='text-gray-800'>Job Type</div>
-              <div className='font-semibold'>{detail?.jobType}</div>
-            </div>
-            <div className='flex justify-between'>
-              <div className='text-gray-800'>Salary</div>
-              <div className='font-semibold'>
-                ${detail?.salaryFrom} - ${detail?.salaryTo} USD
-              </div>
+          </div>
+
+          <Separator className='my-10' />
+
+          <div>
+            <div className='text-3xl font-semibold'>Category</div>
+            <div className='my-10 inline-flex gap-4'>
+              <Badge>Technology</Badge>
             </div>
           </div>
 
-          <Separator />
+          <Separator className='my-10' />
 
-          <div className='my-10'>
-            <div className='mb-4 text-3xl font-semibold'>Categories</div>
-
-            <div className='space-x-5'>
-              <Badge>{detail?.CategoryJob?.name}</Badge>
-            </div>
-          </div>
-
-          <Separator />
-
-          <div className='my-10'>
-            <div className='mb-4 text-3xl font-semibold'>Required Skills</div>
-
-            <div className='space-x-5'>
-              {detail?.requiredSkills.map((item: string, i: number) => (
-                <Badge variant='outline' key={i}>
+          <div className='w-full'>
+            <div className='text-3xl font-semibold'>Required Skills</div>
+            <div className='my-10 inline-flex flex-wrap gap-4'>
+              {data?.skills?.map((item: string, i: number) => (
+                <Badge variant='outline' key={item + i}>
                   {item}
                 </Badge>
               ))}
@@ -116,21 +85,23 @@ const JobDetail: FC<JobDetailProps> = ({ detail }) => {
           </div>
         </div>
       </div>
-      <Separator className='my-8' />
 
-      <div>
-        <div className='text-3xl font-semibold'>Perks & Benefits</div>
-        <div className='text-gray-800'>
-          This job comes with several perks and benefits
+      <div className='pb-16'>
+        <Separator className='mb-14' />
+
+        <div className='mb-6'>
+          <div className=' text-3xl font-semibold'>Perks & Benefits</div>
+          <div className='mt-1 text-gray-500'>
+            This job comes with several perks and benefits
+          </div>
         </div>
 
-        <div className='mt-9 grid grid-cols-4 gap-5'>
-          {benefits?.map((item: any) => (
-            <div key={item}>
-              <PartyPopper className='text-primary mb-6 h-10 w-10' />
-
-              <div className='mb-3 text-lg font-semibold'>{item.benefit}</div>
-              <div className='text-gray-800'>{item.description}</div>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5'>
+          {data?.benefit?.map((item: string, i: number) => (
+            <div key={i}>
+              <BiCategory className='text-primary h-12 w-12' />
+              <div className='mt-6 text-xl font-semibold'>Benefit {i + 1}</div>
+              <div className='mt-3 text-sm text-gray-500'>{item}</div>
             </div>
           ))}
         </div>

@@ -17,7 +17,7 @@ export const jobFormSchema = z.object({
 })
 
 export const overviewFormSchema = z.object({
-	image: z.any(),
+	profilePicture: z.any(),
 	name: z.string({ required_error: "Name is required" }),
 	link: z.string({ required_error: "Website is required" }),
 	location: z.string({ required_error: "Location is required" }),

@@ -17,7 +17,9 @@ export const companyUpdateProfileRequest = async (
   const { data } = await api({
     method: 'put',
     url: COMPANY_SETTING,
-
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
     data: payload,
   });
   return data;

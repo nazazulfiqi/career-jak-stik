@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { FC } from 'react';
 import { MdClose, MdDone } from 'react-icons/md';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -13,6 +14,8 @@ import {
 } from '@/components/ui/table';
 
 import { JOB_APPLICANTS_COLUMNS } from '@/constant/perusahaan';
+import { ModalApprove } from '@/modules/perusahaan/lowongan-pekerjaan/components/Applicants/modal-approve';
+import { ModalReject } from '@/modules/perusahaan/lowongan-pekerjaan/components/Applicants/modal-reject';
 
 import { TGetAllApplicantItem } from '@/types/perusahaan/lowongan';
 
@@ -21,21 +24,7 @@ interface ApplicantsProps {
 }
 
 const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
-  // const [resumeUrl, setResumeUrl] = React.useState<string>("");
-
-  // const resumeHandle = async (url: string) => {
-  //   let resumeUrlGet;
-
-  //   if (applicants.resume) {
-  //     resumeUrlGet = await supabaseGetPublicUrl(applicants, "article");
-  //   } else {
-  //     resumeUrlGet = "/images/company2.png";
-  //   }
-
-  //   setResumeUrl(String(resumeUrlGet));
-  // };
-
-  // console.log(resumeUrl);
+  const [status, setStatus] = React.useState<string>('SUBMITTED');
 
   return (
     <Table>
@@ -44,17 +33,18 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
           {JOB_APPLICANTS_COLUMNS.map((item: string, i: number) => (
             <TableHead key={i}>{item}</TableHead>
           ))}
-          <TableHead>Action</TableHead>
+          <TableHead>Status</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {applicants && (
+        {applicants && applicants?.length > 0 ? (
           <>
             {applicants?.map((item: TGetAllApplicantItem) => (
               <TableRow key={item.id + 1}>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.phoneNumber}</TableCell>
+
                 <TableCell>
                   <Link
                     href={item.resume}
@@ -66,26 +56,89 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
                 </TableCell>
 
                 <TableCell className='flex gap-2'>
-                  <Button
-                    size='icon'
-                    variant='default'
-                    className='rounded-full bg-green-700 p-2 hover:bg-green-800'
-                    asChild
-                  >
-                    <MdDone className='h-8 w-8 font-bold' />
-                  </Button>
-                  <Button
-                    size='icon'
-                    variant='default'
-                    asChild
-                    className='rounded-full bg-red-700 p-2 hover:bg-red-800'
-                  >
-                    <MdClose className='h-8 w-8' />
-                  </Button>
+                  {status === 'SUBMITTED' && (
+                    <>
+                      <ModalApprove
+                        jobId='1'
+                        modalTrigger={
+                          <Button
+                            size='icon'
+                            variant='default'
+                            className='rounded-full bg-green-700 p-2 hover:bg-green-800'
+                            asChild
+                          >
+                            <MdDone className='h-8 w-8 font-bold' />
+                          </Button>
+                        }
+                      />
+
+                      <ModalReject
+                        jobId='1'
+                        modalTrigger={
+                          <Button
+                            size='icon'
+                            variant='default'
+                            asChild
+                            className='rounded-full bg-red-700 p-2 hover:bg-red-800'
+                          >
+                            <MdClose className='h-8 w-8' />
+                          </Button>
+                        }
+                      />
+                    </>
+                  )}
+                  {status === 'APPROVED' && (
+                    <Badge
+                      variant='default'
+                      className=' bg-green-700 text-white hover:bg-green-800'
+                    >
+                      Diterima
+                    </Badge>
+                  )}
+                  {status === 'REJECT' && (
+                    <Badge variant='destructive'>Ditolak</Badge>
+                  )}
+                  {status === 'REVIEW' && (
+                    <>
+                      <ModalApprove
+                        jobId='1'
+                        modalTrigger={
+                          <Button
+                            size='icon'
+                            variant='default'
+                            className='rounded-full bg-green-700 p-2 hover:bg-green-800'
+                            asChild
+                          >
+                            <MdDone className='h-8 w-8 font-bold' />
+                          </Button>
+                        }
+                      />
+
+                      <ModalReject
+                        jobId='1'
+                        modalTrigger={
+                          <Button
+                            size='icon'
+                            variant='default'
+                            asChild
+                            className='rounded-full bg-red-700 p-2 hover:bg-red-800'
+                          >
+                            <MdClose className='h-8 w-8' />
+                          </Button>
+                        }
+                      />
+                    </>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
           </>
+        ) : (
+          <TableRow>
+            <TableCell colSpan={5} className='text-center'>
+              Tidak ada pelamar dalam lowongan ini.
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>

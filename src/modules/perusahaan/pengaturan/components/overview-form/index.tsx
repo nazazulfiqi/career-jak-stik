@@ -70,6 +70,7 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
   const form = useForm<z.infer<typeof overviewFormSchema>>({
     resolver: zodResolver(overviewFormSchema),
     defaultValues: {
+      profilePicture: data?.profilePicture,
       name: data?.name,
       about: data?.about === null ? '' : data?.about,
       location: data?.location === null ? '' : data?.location,
@@ -82,7 +83,9 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
   });
 
   const onSubmit = (values: z.infer<typeof overviewFormSchema>) => {
-    const payload = {
+    console.log(values);
+
+    const payload: any = {
       name: values.name,
       location: values.location,
       employeeTotal: values.employeeTotal,
@@ -92,6 +95,12 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
       about: values.about,
       link: values.link,
     };
+
+    if (typeof values.profilePicture !== 'string') {
+      payload.profilePicture = values.profilePicture;
+    } else {
+      payload.profilePicture = undefined;
+    }
 
     mutate(payload, {
       onSuccess: () => {
@@ -128,7 +137,11 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
             title='Company Logo'
             subtitle='This image will be shown publicly as company logo.'
           >
-            <CustomUpload form={form} name='image' />
+            <CustomUpload
+              form={form}
+              name='profilePicture'
+              defaultImg={data?.profilePicture}
+            />
           </FieldInput>
 
           <FieldInput

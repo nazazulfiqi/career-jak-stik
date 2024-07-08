@@ -12,6 +12,7 @@ export type TCompanyProfileItem = {
   techStack: any[]
   about: any
   link: string
+  profilePicture: string | null
 }
 
 export type TCompanyProfilePayload = {

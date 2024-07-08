@@ -44,7 +44,7 @@ const PerusahaanLowonganPekerjaanContent: FC<AllJobCompanyProps> = ({
       <div className='text-3xl font-semibold'>Job Listings</div>
       <div className='mt-10'>
         <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableCaption>A list of your jobs that you have posted.</TableCaption>
           <TableHeader>
             <TableRow>
               {JOB_LISTINGS_COLUMNS.map((item: string, i: number) => (

@@ -27,7 +27,7 @@ const LowonganPekerjaanDetailModule: FC = () => {
 
   return (
     <PerusahaanLayout>
-      {data ? (
+      {data && !isLoading ? (
         <LowonganPekerjaanDetailContent />
       ) : (
         <LoadingDots hScreen={true} />

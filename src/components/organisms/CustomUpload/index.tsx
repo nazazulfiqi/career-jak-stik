@@ -8,10 +8,15 @@ import { ChangeEvent, useRef, useState } from 'react';
 interface CustomUploadProps {
   form: any;
   name: string;
+  defaultImg?: string | null | undefined;
 }
 
-export default function CustomUpload({ form, name }: CustomUploadProps) {
-  const [previewImg, setPreviewImg] = useState('');
+export default function CustomUpload({
+  form,
+  name,
+  defaultImg,
+}: CustomUploadProps) {
+  const [previewImg, setPreviewImg] = useState(defaultImg || '');
 
   const inputRef = useRef<HTMLInputElement>(null);
 

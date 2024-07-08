@@ -2,19 +2,25 @@
 
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import React, { FC } from 'react';
 
+import { useGetDetailJob } from '@/hooks/jobs/hook';
 import { useApplicantByJobIdState } from '@/hooks/perusahaan/jobs/hook';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import { jobDetailData } from '@/constant/perusahaan';
 import Applicants from '@/modules/perusahaan/lowongan-pekerjaan/components/Applicants';
 import JobDetail from '@/modules/perusahaan/lowongan-pekerjaan/components/JobDetail';
 
 const LowonganPekerjaanDetailContent: FC = () => {
-  const { getApplicantByJobIdData, setApplicantByJobIdData } =
-    useApplicantByJobIdState();
+  const params = useParams();
+
+  console.log(params);
+
+  const { data, isLoading } = useGetDetailJob(String(params.id));
+
+  const { getApplicantByJobIdData } = useApplicantByJobIdState();
 
   const applicantData = getApplicantByJobIdData?.data;
 
@@ -39,10 +45,10 @@ const LowonganPekerjaanDetailContent: FC = () => {
           </Link>
         </div>
         <div>
-          <div className='mb-1 text-2xl font-semibold'>Software Engineer</div>
+          <div className='mb-1 text-2xl font-semibold'>{data?.data?.title}</div>
           <div>
-            Technology . Full-time .{' '}
-            <span className='text-gray-800'>10/50 Hired</span>
+            {data?.data?.categoryId} . {data?.data?.jobType} .{' '}
+            {/* <span className='text-gray-800'>10/50 Hired</span> */}
           </div>
         </div>
       </div>
@@ -55,7 +61,11 @@ const LowonganPekerjaanDetailContent: FC = () => {
           <Applicants applicants={applicantData} />
         </TabsContent>
         <TabsContent value='jobDetails'>
-          <JobDetail detail={jobDetailData} />
+          {data ? (
+            <JobDetail data={data?.data} />
+          ) : (
+            <p>Detail tidak ditemukan.</p>
+          )}
         </TabsContent>
       </Tabs>
     </div>
