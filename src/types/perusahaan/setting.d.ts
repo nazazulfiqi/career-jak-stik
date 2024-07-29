@@ -24,6 +24,7 @@ export type TCompanyProfilePayload = {
   dateFounded: any
   techStack: any[]
   about: any
+  profilePicture: File | string | null
   link: string
 }
 

@@ -63,6 +63,8 @@ const PostingLowonganContent: FC = () => {
   const { mutate } = useCreateJob();
 
   const onSubmit = async (val: z.infer<typeof jobFormSchema>) => {
+    console.log(val);
+
     try {
       const payload: TCreateJobPayload = {
         title: val.title,

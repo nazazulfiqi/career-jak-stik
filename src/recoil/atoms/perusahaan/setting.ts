@@ -10,6 +10,7 @@ export const companySettingState = atom<TCompanyProfileResponse>({
     message: '',
         data: { 
            id: '',
+           profilePicture: '',
            name: '',
            email: '',
            employeeTotal: '',

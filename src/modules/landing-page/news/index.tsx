@@ -2,9 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
+import { useGetAllNews } from '@/hooks/news/hook';
+
 import CardNews from '@/components/organisms/CardNews';
 
+import { TNewsGetAllItem } from '@/types/news';
+
 const NewsSection = () => {
+  const { data, isLoading } = useGetAllNews();
+
   return (
     <section className='text-neutrals-700 mb-12 bg-white'>
       <div className='mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-8 py-12 md:px-14 lg:px-16 2xl:px-0'>
@@ -21,8 +27,8 @@ const NewsSection = () => {
           </Link>
         </div>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4'>
-          {[0, 1, 2, 3].map((i) => (
-            <CardNews key={i} />
+          {data?.data.map((item: TNewsGetAllItem) => (
+            <CardNews key={item.id} data={item} />
           ))}
         </div>
         <Link

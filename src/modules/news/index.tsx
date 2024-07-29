@@ -3,10 +3,15 @@
 import React, { FC } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
+import { useGetAllNews } from '@/hooks/news/hook';
+
 import Pagination from '@/components/atoms/pagination';
 import CardNews from '@/components/organisms/CardNews';
+import { TNewsGetAllItem } from '@/types/news';
 
 const NewsModule: FC = () => {
+  const { data, isLoading } = useGetAllNews();
+
   const handlePageChange = (page: number) => {
     console.log(page);
   };
@@ -28,9 +33,9 @@ const NewsModule: FC = () => {
         </div>
       </section>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 '>
-        {[0, 1, 2, 3].map((i) => (
-          <CardNews key={i + 1} />
-        ))}
+      {data?.data.map((item: TNewsGetAllItem) => (
+            <CardNews key={item.id} data={item} />
+          ))}
       </div>
       <Pagination
         currentPage={6}
