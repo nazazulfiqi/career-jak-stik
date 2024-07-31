@@ -1,0 +1,1 @@
+export const APPLICANTS_ME = 'v1/users/job-status';

@@ -4,7 +4,9 @@ import React, { FC } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
-const CardLamaran: FC = () => {
+import { TApplicantsMeItem } from '@/types/applicants-me';
+
+const CardLamaran: FC<{ data: TApplicantsMeItem }> = ({ data }) => {
   return (
     <Card>
       <CardHeader className=''>
@@ -25,7 +27,7 @@ const CardLamaran: FC = () => {
           </div>
 
           <div>
-            <Badge className='font-normal '>Diterima</Badge>
+            <Badge className='font-normal '>{data?.status}</Badge>
           </div>
         </div>
       </CardHeader>
