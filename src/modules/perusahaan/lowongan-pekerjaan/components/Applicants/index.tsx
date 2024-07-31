@@ -1,6 +1,10 @@
+'use client';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { MdClose, MdDone } from 'react-icons/md';
+
+import { useStatusReview } from '@/hooks/perusahaan/jobs/hook';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -12,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useToast } from '@/components/ui/use-toast';
 
 import { JOB_APPLICANTS_COLUMNS } from '@/constant/perusahaan';
 import { ModalApprove } from '@/modules/perusahaan/lowongan-pekerjaan/components/Applicants/modal-approve';
@@ -24,7 +29,30 @@ interface ApplicantsProps {
 }
 
 const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
-  const [status, setStatus] = React.useState<string>('SUBMITTED');
+  const queryClient = useQueryClient();
+
+  const { toast } = useToast();
+
+  const [applicantId, setApplicantId] = React.useState<string>('');
+
+  const { mutate: mutateStatusReview } = useStatusReview();
+  const handleStatusReview = async () => {
+    if (applicantId) {
+      await mutateStatusReview(applicantId, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['all-applicant-by-job-id-get'] as any);
+          toast({
+            title: 'Sukses',
+            description: 'Pelamar berhasil direview',
+          });
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleStatusReview();
+  }, [applicantId]);
 
   return (
     <Table>
@@ -47,6 +75,10 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
 
                 <TableCell>
                   <Link
+                    onClick={() => {
+                      setApplicantId(item.id);
+                      handleStatusReview();
+                    }}
                     href={item.resume}
                     className='text-primary-base'
                     target='_blank'
@@ -56,10 +88,10 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
                 </TableCell>
 
                 <TableCell className='flex gap-2'>
-                  {status === 'SUBMITTED' && (
+                  {item?.status === 'SUBMITTED' && (
                     <>
                       <ModalApprove
-                        jobId='1'
+                        applicant_id={item.id}
                         modalTrigger={
                           <Button
                             size='icon'
@@ -73,7 +105,7 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
                       />
 
                       <ModalReject
-                        jobId='1'
+                        applicant_id={item.id}
                         modalTrigger={
                           <Button
                             size='icon'
@@ -87,7 +119,7 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
                       />
                     </>
                   )}
-                  {status === 'APPROVED' && (
+                  {item?.status === 'ACCEPTED' && (
                     <Badge
                       variant='default'
                       className=' bg-green-700 text-white hover:bg-green-800'
@@ -95,13 +127,13 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
                       Diterima
                     </Badge>
                   )}
-                  {status === 'REJECT' && (
+                  {item?.status === 'REJECTED' && (
                     <Badge variant='destructive'>Ditolak</Badge>
                   )}
-                  {status === 'REVIEW' && (
+                  {item?.status === 'REVIEWED' && (
                     <>
                       <ModalApprove
-                        jobId='1'
+                        applicant_id={item.id}
                         modalTrigger={
                           <Button
                             size='icon'
@@ -115,7 +147,7 @@ const Applicants: FC<ApplicantsProps> = ({ applicants }) => {
                       />
 
                       <ModalReject
-                        jobId='1'
+                        applicant_id={item.id}
                         modalTrigger={
                           <Button
                             size='icon'

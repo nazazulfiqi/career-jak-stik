@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { IoWarningOutline } from 'react-icons/io5';
+
+import { useStatusAccept } from '@/hooks/perusahaan/jobs/hook';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,25 +14,34 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/use-toast';
 
 interface modalTriggerProps {
   modalTrigger: React.ReactNode;
-  jobId?: string;
+  applicant_id: string;
 }
 
-export const ModalApprove = ({ modalTrigger, jobId }: modalTriggerProps) => {
+export const ModalApprove = ({
+  modalTrigger,
+  applicant_id,
+}: modalTriggerProps) => {
   const queryClient = useQueryClient();
 
-  const router = useRouter();
+  const { toast } = useToast();
 
-  const handleSubmitDelete = async () => {
-    // await mutate(articleId, {
-    //   onSuccess: () => {
-    //     router.push('/sekilas-ilmu');
-    //     queryClient.invalidateQueries(['article-get'] as any);
-    //     toast.success('Artikel Berhasil Dihapus!');
-    //   },
-    // });
+  const { mutate: mutateStatusAccept } = useStatusAccept();
+
+  const handleStatusAccept = async () => {
+    console.log(applicant_id);
+    await mutateStatusAccept(applicant_id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['article-get'] as any);
+        toast({
+          title: 'Sukses',
+          description: 'Pelamar berhasil di terima',
+        });
+      },
+    });
   };
 
   return (
@@ -64,7 +74,7 @@ export const ModalApprove = ({ modalTrigger, jobId }: modalTriggerProps) => {
             <Button
               type='submit'
               className='w-full bg-green-700 hover:bg-green-800'
-              onClick={handleSubmitDelete}
+              onClick={handleStatusAccept}
             >
               Terima
             </Button>

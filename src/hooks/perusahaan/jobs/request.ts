@@ -1,6 +1,6 @@
 
 
-import { JOB, JOB_CATEGORY } from "@/lib/endpoints/jobs";
+import { JOB, JOB_CATEGORY, STATUS_ACCEPT, STATUS_REJECT, STATUS_REVIEW } from "@/lib/endpoints/jobs";
 import { ALL_APPLICANT_BY_JOB_ID, ALL_JOB_COMPANY } from "@/lib/endpoints/perusahaan/lowongan";
 
 import { api } from '../../../config/api/apiConfig';
@@ -48,3 +48,47 @@ export const getAllApplicantByJobIdRequest = async (id: string): Promise<TGetAll
   return data;
 }
 
+export const statusReviewRequest = async (
+  applicant_id: string,
+) => {
+  
+  const { data } = await api({
+    method: "put",
+    url: `${STATUS_REVIEW}/${applicant_id}`,
+    headers: {
+      "Content-Type": "application/json",
+      
+    },
+  })
+  return data;
+};
+
+export const statusAcceptRequest = async (
+  applicant_id: string,
+) => {
+  
+  const { data } = await api({
+    method: "put",
+    url: `${STATUS_ACCEPT}/${applicant_id}`,
+    headers: {
+      "Content-Type": "application/json",
+      
+    },
+  })
+  return data;
+};
+
+export const statusRejectRequest = async (
+  applicant_id: string,
+) => {
+  
+  const { data } = await api({
+    method: "put",
+    url: `${STATUS_REJECT}/${applicant_id}`,
+    headers: {
+      "Content-Type": "application/json",
+      
+    },
+  })
+  return data;
+};

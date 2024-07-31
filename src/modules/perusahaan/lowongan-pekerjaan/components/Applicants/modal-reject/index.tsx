@@ -2,6 +2,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { IoWarningOutline } from 'react-icons/io5';
 
+import { useStatusReject } from '@/hooks/perusahaan/jobs/hook';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -13,25 +15,34 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/use-toast';
 
 interface modalTriggerProps {
   modalTrigger: React.ReactNode;
-  jobId?: string;
+  applicant_id: string;
 }
 
-export const ModalReject = ({ modalTrigger, jobId }: modalTriggerProps) => {
+export const ModalReject = ({
+  modalTrigger,
+  applicant_id,
+}: modalTriggerProps) => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
+  const { toast } = useToast();
 
-  const handleSubmitDelete = async () => {
-    // await mutate(articleId, {
-    //   onSuccess: () => {
-    //     router.push('/sekilas-ilmu');
-    //     queryClient.invalidateQueries(['article-get'] as any);
-    //     toast.success('Artikel Berhasil Dihapus!');
-    //   },
-    // });
+  const { mutate: mutateStatusReject } = useStatusReject();
+
+  const handleStatusReject = async () => {
+    await mutateStatusReject(applicant_id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['article-get'] as any);
+        toast({
+          title: 'Sukses',
+          description: 'Berhasil menolak pelamar',
+        });
+      },
+    });
   };
 
   return (
@@ -64,7 +75,7 @@ export const ModalReject = ({ modalTrigger, jobId }: modalTriggerProps) => {
             <Button
               type='submit'
               className='w-full bg-red-800 hover:bg-red-900'
-              onClick={handleSubmitDelete}
+              onClick={handleStatusReject}
             >
               Tolak
             </Button>

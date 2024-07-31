@@ -2,7 +2,7 @@ import { useMutation, UseMutationResult, useQuery,UseQueryResult } from "@tansta
 import { useRecoilState } from "recoil";
 
 import { TMetaErrorResponse } from "@/lib/types";
-import { createJobRequest, getAllApplicantByJobIdRequest, getAllJobByCompanyIdRequest, getJobCategoryRequest } from "@/hooks/perusahaan/jobs/request";
+import { createJobRequest, getAllApplicantByJobIdRequest, getAllJobByCompanyIdRequest, getJobCategoryRequest, statusAcceptRequest, statusRejectRequest, statusReviewRequest } from "@/hooks/perusahaan/jobs/request";
 
 import { applicantJobState } from "@/recoil/atoms/perusahaan/applicant-job";
 
@@ -53,4 +53,28 @@ export const useGetAllJobByCompanyId = (
         getApplicantByJobIdData: get,
         setApplicantByJobIdData: (val) => set(val),
       };
+    };
+
+    export const useStatusReview = () => {
+      return useMutation({
+        mutationKey: ['review'],
+        mutationFn: async (applicant_id: string) =>
+          await statusReviewRequest(applicant_id),
+      });
+    };
+
+    export const useStatusAccept = () => {
+      return useMutation({
+        mutationKey: ['accept'],
+        mutationFn: async (applicant_id: string) =>
+          await statusAcceptRequest(applicant_id),
+      });
+    };
+
+    export const useStatusReject = () => {
+      return useMutation({
+        mutationKey: ['reject'],
+        mutationFn: async (applicant_id: string) =>
+          await statusRejectRequest(applicant_id),
+      });
     };
