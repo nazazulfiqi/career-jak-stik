@@ -15,6 +15,7 @@ export type TUserData =  {
   addInformation: string | null
   resume: File | null | string
   transcript: File | null | string
+  profilePicture: string | null
 }
 
 export type TUserDetailResponse = TMetaResponseSingle<TUserData>;
@@ -34,3 +35,7 @@ export type TUpdateUserDataPayload = {
   resume?: any
   transcript?: any
 }
+
+export type TProfilePicturePayload = {
+  profilePicture?: File | string | null;
+};

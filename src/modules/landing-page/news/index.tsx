@@ -27,10 +27,11 @@ const NewsSection = () => {
           </Link>
         </div>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4'>
-          {data?.data.map((item: TNewsGetAllItem) => (
+          {data?.data?.slice(0, 4).map((item: TNewsGetAllItem) => (
             <CardNews key={item.id} data={item} />
           ))}
         </div>
+
         <Link
           href='/berita'
           className='text-primary-base flex items-center gap-2 md:hidden'

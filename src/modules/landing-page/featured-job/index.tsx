@@ -33,9 +33,9 @@ const FeaturedJobSection = () => {
               <LoadingDots />
             </div>
           ) : (
-            data?.data?.map((item: TGetAllJob) => (
-              <JobItem key={item.id} {...item} />
-            ))
+            data?.data
+              ?.slice(0, 8)
+              .map((item: TGetAllJob) => <JobItem key={item.id} {...item} />)
           )}
         </div>
         <Link

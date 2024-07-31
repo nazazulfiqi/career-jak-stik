@@ -139,7 +139,7 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
   const _profile_user = {
     email: profileData?.data?.email as string,
     full_name: profileData?.data?.name as string,
-    avatar: null,
+    avatar: profileData?.data?.profilePicture as string,
     // email: 'zulfiqinaza@gmail.com',
     // full_name: 'Naza Zulfiqi',
     // avatar: '/images/stmik.png',

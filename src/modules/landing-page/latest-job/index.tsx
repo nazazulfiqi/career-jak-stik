@@ -34,9 +34,11 @@ const LatestJobSection = () => {
               <LoadingDots />
             </div>
           ) : (
-            data?.data?.map((item: TGetAllJob) => (
-              <LatestJobItem key={item.id} {...item} />
-            ))
+            data?.data
+              ?.slice(0, 6)
+              .map((item: TGetAllJob) => (
+                <LatestJobItem key={item.id} {...item} />
+              ))
           )}
         </div>
         <Link

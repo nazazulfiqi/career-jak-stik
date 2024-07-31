@@ -3,12 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import Avatar from 'react-avatar';
 import { AiOutlineFire } from 'react-icons/ai';
 import { BsPeople } from 'react-icons/bs';
 import {
   HiOutlineLocationMarker,
   HiOutlineOfficeBuilding,
 } from 'react-icons/hi';
+
+import { formatDate } from '@/lib/helper/formatDate';
 
 import { Badge } from '@/components/ui/badge';
 
@@ -27,12 +30,22 @@ const DetailPerusahaanContent: FC<DetailPerusahaanProps> = ({ data }) => {
     <section className='mx-auto w-full max-w-[1440px] bg-white px-8 py-4 md:px-14 lg:px-16  2xl:px-0'>
       <div className=''>
         <div className='mt-10 inline-flex items-start gap-6'>
-          <Image
-            src='/images/stmik.png'
-            alt='Company Logo'
-            width={150}
-            height={150}
-          />
+          {data?.profilePicture ? (
+            <Image
+              src={data?.profilePicture || '/images/stmik.png'}
+              alt='Company Logo'
+              width={150}
+              height={150}
+            />
+          ) : (
+            <Avatar
+              name={data?.name}
+              color='#F26800'
+              className=' h-[150px] w-[150px] rounded-full'
+              size='150'
+            />
+          )}
+
           <div>
             <div className='inline-flex items-center gap-4'>
               <span className='text-4xl font-semibold'>{data?.name}</span>
@@ -40,7 +53,7 @@ const DetailPerusahaanContent: FC<DetailPerusahaanProps> = ({ data }) => {
             </div>
             <div className='mt-2'>
               <Link href='/' className='text-primary font-semibold'>
-                https://jakstik.ac.id
+                {data.link}
               </Link>
             </div>
             <div className='mt-6 inline-flex items-center gap-10'>
@@ -53,7 +66,7 @@ const DetailPerusahaanContent: FC<DetailPerusahaanProps> = ({ data }) => {
                 <div>
                   <div className='text-gray-500'>Founded</div>
                   <div className='font-semibold'>
-                    {data.dateFounded ? data.dateFounded : '-'}
+                    {data.dateFounded ? formatDate(data.dateFounded) : '-'}
                   </div>
                 </div>
               </div>
@@ -105,7 +118,7 @@ const DetailPerusahaanContent: FC<DetailPerusahaanProps> = ({ data }) => {
             <div className='mb-16'>
               <div className='mb-3 text-3xl font-semibold'>Company Profile</div>
               <div
-                className='text-black'
+                className='text-justify text-black'
                 dangerouslySetInnerHTML={{
                   __html: data.about
                     ? data.about

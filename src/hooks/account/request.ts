@@ -1,8 +1,8 @@
-import { USER_PROFILE } from "@/lib/endpoints/account";
+import { PROFILE_PICTURE, USER_PROFILE } from "@/lib/endpoints/account";
 
 import { api } from '../../config/api/apiConfig';
 
-import { TUpdateUserDataPayload, TUserDetailResponse } from "@/types/account";
+import { TProfilePicturePayload, TUpdateUserDataPayload, TUserDetailResponse } from "@/types/account";
 
 export const profileGetRequest = async (): Promise<TUserDetailResponse> => {
   const { data } = await api.get(USER_PROFILE);
@@ -27,6 +27,20 @@ export const updateProfileRequest = async (
       'Content-Type': 'multipart/form-data',
     },
     data: payload,
+  });
+  return data;
+};
+
+export const updateProfilePictureRequest = async (
+  formData: FormData
+): Promise<TProfilePicturePayload> => {
+  const { data } = await api({
+    method: 'put',
+    url: PROFILE_PICTURE,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    data: formData,
   });
   return data;
 };

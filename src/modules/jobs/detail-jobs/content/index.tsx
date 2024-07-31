@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import React, { FC } from 'react';
+import Avatar from 'react-avatar';
 import { BiCategory } from 'react-icons/bi';
 
 import FormModalApply from '@/components/organisms/FormModalApply';
@@ -24,16 +25,26 @@ const DetailLowonganContent: FC<{ data: TGetDetailJob }> = ({ data }) => {
     <section className='mx-auto w-full max-w-[1440px] px-8 md:px-14 lg:px-16 2xl:px-0'>
       <div className='mx-auto mt-6 w-full flex-row items-center justify-between  bg-slate-100 p-12 shadow-md lg:flex'>
         <div className='inline-flex items-center gap-5'>
-          <Image
-            src='/images/stmik.png'
-            alt='Company Logo'
-            width={88}
-            height={88}
-          />
+          {data?.user?.profilePicture ? (
+            <Image
+              src={data?.user?.profilePicture || '/images/stmik.png'}
+              alt='Company Logo'
+              width={88}
+              height={88}
+            />
+          ) : (
+            <Avatar
+              name={data?.user?.name}
+              color='#F26800'
+              className=' h-[88px] w-[88px] rounded-full'
+              size='88'
+            />
+          )}
+
           <div>
             <div className='text-2xl font-semibold'>{data.title}</div>
             <div className='text-muted-foreground'>
-              Location . {data.jobType}
+              Indonesia . {data.jobType}
             </div>
           </div>
         </div>

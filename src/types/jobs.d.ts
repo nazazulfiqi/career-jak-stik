@@ -29,6 +29,7 @@ export type TJobItem = {
   description: string
   responsibility: string
   benefit: string[]
+  companyPicture: string | null
 }
 
 export type TGetAllJob = {
@@ -40,6 +41,7 @@ export type TGetAllJob = {
   skills: string[]
   companyName: string
   location: null | string
+  companyPicture: string | null
 }
 
 export type TGetDetailJob = {
@@ -54,6 +56,10 @@ export type TGetDetailJob = {
   description: string
   responsibility: string
   benefit: string[]
+  user : {
+    profilePicture: string | null
+    name: string
+  }
 }
 
 export type TApplyJobPayload = {

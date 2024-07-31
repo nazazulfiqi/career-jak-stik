@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import Avatar from 'react-avatar';
 
 import { Badge } from '@/components/ui/badge';
 
@@ -15,6 +16,7 @@ const JobItem: FC<TGetAllJob> = ({
   skills,
   companyName,
   location,
+  companyPicture,
 }) => {
   const maxSkillsToShow = 2;
   return (
@@ -23,12 +25,22 @@ const JobItem: FC<TGetAllJob> = ({
       className='border-border cursor-pointer border p-6'
     >
       <div className='flex flex-row items-start justify-between'>
-        <Image
-          src='/images/stmik.png'
-          alt='Company Logo'
-          width={48}
-          height={48}
-        />
+        {companyPicture ? (
+          <Image
+            src={companyPicture || '/images/stmik.png'}
+            alt='Company Logo'
+            width={48}
+            height={48}
+          />
+        ) : (
+          <Avatar
+            name={companyName}
+            color='#F26800'
+            className=' h-[48px] w-[48px] rounded-full'
+            size='48'
+          />
+        )}
+
         <span className='text-primary border-primary rounded border px-4 py-1 text-xs font-semibold'>
           {jobType}
         </span>

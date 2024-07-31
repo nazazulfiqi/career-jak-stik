@@ -10,6 +10,8 @@ export type TCompanyDetailItem = {
   dateFounded: any
   techStack: any[]
   about: any
+  profilePicture: string | null
+  link: string | null
 }
 
 export type TCompanyDetailResponse = TMetaResponseSingle<TCompanyDetailItem>

@@ -7,6 +7,7 @@ import { useGetAllNews } from '@/hooks/news/hook';
 
 import Pagination from '@/components/atoms/pagination';
 import CardNews from '@/components/organisms/CardNews';
+
 import { TNewsGetAllItem } from '@/types/news';
 
 const NewsModule: FC = () => {
@@ -32,10 +33,10 @@ const NewsModule: FC = () => {
           />
         </div>
       </section>
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 '>
-      {data?.data.map((item: TNewsGetAllItem) => (
-            <CardNews key={item.id} data={item} />
-          ))}
+      <div className='grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 '>
+        {data?.data.map((item: TNewsGetAllItem) => (
+          <CardNews key={item.id} data={item} />
+        ))}
       </div>
       <Pagination
         currentPage={6}
