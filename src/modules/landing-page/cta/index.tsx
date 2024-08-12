@@ -24,7 +24,7 @@ const CTASection = () => {
           <div className='relative  w-full md:w-1/2'>
             <div className='absolute right-0 top-10 mx-auto md:top-0 lg:-top-32'>
               <Image
-                src='/images/landing-page/cta/cta-image.jpg'
+                src='/images/landing-page/company-dashboard1.png'
                 alt='CTA'
                 width={0}
                 height={0}

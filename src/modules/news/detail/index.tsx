@@ -9,8 +9,8 @@ import { useGetDetailNews } from '@/hooks/news/hook';
 import { BreadCrumb } from '@/components/atoms/bread-crumb';
 import LoadingDots from '@/components/atoms/LoadingDots';
 
-import RelatedNewsComponent from '@/modules/news/detail/components';
 import NotFound from '@/app/not-found';
+import RelatedNewsComponent from '@/modules/news/detail/components';
 
 const DetailNewsModule: FC = () => {
   const NewsDetailBC = [
@@ -63,7 +63,7 @@ const DetailNewsModule: FC = () => {
                 <div>
                   <div className='block justify-between md:flex md:py-6'>
                     <p>
-                      {data?.data?.title} - {data?.data?.createdAt}
+                      {data?.data?.author} - {data?.data?.createdAt}
                     </p>
                   </div>
                   <div className='max-h-[500px]  w-full overflow-hidden'>

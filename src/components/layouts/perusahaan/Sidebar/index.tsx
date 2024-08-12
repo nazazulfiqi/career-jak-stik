@@ -4,7 +4,6 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { BsGear } from 'react-icons/bs';
 import { FiUsers } from 'react-icons/fi';
 import { HiOutlineClipboardDocumentList } from 'react-icons/hi2';
-import { MdOutlineArticle } from 'react-icons/md';
 
 import { Button } from '@/components/ui/button';
 
@@ -22,19 +21,19 @@ const Sidebar: FC = () => {
               className='hover:text-primary-base w-full items-center justify-start rounded-none'
               asChild
             >
-              <Link href='/'>
+              <Link href='/perusahaan/dashboard'>
                 <AiOutlineHome className='mr-2 text-lg' />
                 Home
               </Link>
             </Button>
 
-            <Button
+            {/* <Button
               variant='ghost'
               className='hover:text-primary-base w-full items-center  justify-start rounded-none'
             >
               <FiUsers className='mr-2 text-lg' />
               All Applicants
-            </Button>
+            </Button> */}
             <Button
               variant='ghost'
               className='hover:text-primary-base w-full items-center  justify-start rounded-none'

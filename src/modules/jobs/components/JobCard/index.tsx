@@ -5,7 +5,6 @@ import React, { FC } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 
 import { TGetAllJob } from '@/types/jobs';
@@ -54,11 +53,11 @@ const JobCard: FC<TGetAllJob> = ({
         <Button className='w-full' size='lg' asChild>
           <Link href={`/cari-lowongan/${id}`}>Apply</Link>
         </Button>
-        <Progress value={(10 / 50) * 100} className='mt-2 h-2' />
+        {/* <Progress value={(10 / 50) * 100} className='mt-2 h-2' />
         <div className='mt-2 text-center text-sm text-gray-500'>
           <span className='font-semibold text-black'>10 applied</span> of 50
           capacity
-        </div>
+        </div> */}
       </div>
     </div>
   );

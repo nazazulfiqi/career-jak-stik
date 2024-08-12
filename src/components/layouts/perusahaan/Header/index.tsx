@@ -14,7 +14,7 @@ const Header: FC = () => {
     <div className='border-border mb-3 flex flex-row items-center justify-between border-b  pb-3'>
       <div>
         <div>Company</div>
-        <div className='font-semibold'>STMIK Jakarta STI&K</div>
+        <div className='font-semibold'>Laboratorium SI/MI</div>
       </div>
       <div>
         <Button
