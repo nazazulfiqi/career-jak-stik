@@ -41,6 +41,12 @@ export const ModalApprove = ({
           description: 'Pelamar berhasil di terima',
         });
       },
+      onError: () => {
+        toast({
+          title: 'Error',
+          description: 'Resume Pelamar Harus dilihat Terlebih Dahulu',
+        });
+      },
     });
   };
 
