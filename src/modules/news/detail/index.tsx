@@ -86,8 +86,9 @@ const DetailNewsModule: FC = () => {
                 <span className='bg-primary-base mb-2 block h-[4px] w-24 rounded-md'></span>
 
                 <div className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-primary scrollbar-track-black h-[400px] overflow-y-auto'>
-                  {relatedNewsData && relatedNewsData?.length > 0 ? (
-                    relatedNewsData?.map((item: TNewsGetAllItem) => (
+                  {relatedNewsData?.data &&
+                  relatedNewsData?.data?.length > 0 ? (
+                    relatedNewsData?.data?.map((item: TNewsGetAllItem) => (
                       <Fragment key={item.id}>
                         <RelatedNewsComponent data={item} />
                       </Fragment>
