@@ -51,7 +51,7 @@ const DetailLowonganContent: FC<{ data: TGetDetailJob }> = ({ data }) => {
         </div>
         {session ? (
           <FormModalApply
-            image='/images/stmik.png'
+            image={data.user?.profilePicture || '/images/stmik.png'}
             roles={data.title}
             jobType={data.jobType}
             location='Indonesia'
