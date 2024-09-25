@@ -93,7 +93,7 @@ const SignInModule: FC = () => {
                 <FormControl>
                   <Input
                     type='password'
-                    placeholder='Enter your email'
+                    placeholder='Enter your password'
                     {...field}
                   />
                 </FormControl>
