@@ -1,7 +1,9 @@
+// jobs.tsx
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { FC } from 'react';
+import { useSearchParams } from 'next/navigation';
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -15,21 +17,17 @@ import { formFilterSchema } from '@/validations/form-schema';
 
 const LowonganModule: FC = () => {
   const jobsBC = [
-    {
-      name: 'Beranda',
-      link: '/',
-    },
-    {
-      name: 'Lowongan',
-      link: '/cari-lowongan',
-    },
+    { name: 'Beranda', link: '/' },
+    { name: 'Lowongan', link: '/cari-lowongan' },
   ];
+
+  const [search, setSearch] = useState<string>('');
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
 
   const formFilter = useForm<z.infer<typeof formFilterSchema>>({
     resolver: zodResolver(formFilterSchema),
-    defaultValues: {
-      categories: [],
-    },
+    defaultValues: { categories: [] },
   });
 
   const onSubmitFormFilter = async (val: z.infer<typeof formFilterSchema>) => {
@@ -41,28 +39,18 @@ const LowonganModule: FC = () => {
       name: 'categories',
       label: 'Kategori',
       items: [
-        {
-          id: 'kt1',
-          label: 'Technology',
-        },
-        {
-          id: 'kt2',
-          label: 'Graphic Design',
-        },
-        {
-          id: 'kt3',
-          label: 'Sales',
-        },
+        { id: 'kt1', label: 'Technology' },
+        { id: 'kt2', label: 'Graphic Design' },
+        { id: 'kt3', label: 'Sales' },
       ],
     },
   ];
 
-  const { data, isLoading } = useGetAllJob();
+  const { data, isLoading } = useGetAllJob(searchQuery);
 
   return (
     <BaseLayout>
       <BreadCrumb items={jobsBC} />
-
       <ExploreDataContainer
         formFilter={formFilter}
         onSubmitFilter={onSubmitFormFilter}

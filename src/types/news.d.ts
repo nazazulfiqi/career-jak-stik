@@ -26,3 +26,4 @@ export type TNewsGetAllResponse = TMetaResponse<TNewsGetAllItem>
 export type TNewsCreateResponse = TMetaResponseSingle<TNewsCreateResponseItem>
 export type TNewsGetDetailResponse = TMetaResponseSingle<TNewsGetAllItem>
 export type TNewsEditResponse = TMetaResponseSingle<TNewsCreateResponseItem>
+export type TNewsRelatedResponse = TMetaResponse<TNewsGetAllItem>

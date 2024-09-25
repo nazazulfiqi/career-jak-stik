@@ -4,7 +4,6 @@ import { BiCategory } from 'react-icons/bi';
 import { formatCurrency } from '@/lib/helper/formatCurrency';
 
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 
 import { TGetDetailJob } from '@/types/jobs';
@@ -32,26 +31,26 @@ const JobDetail: FC<{ data: TGetDetailJob }> = ({ data }) => {
         <div>
           <div className='text-3xl font-semibold'>About this role</div>
 
-          <div className='mt-6 bg-slate-50 p-4'>
+          {/* <div className='mt-6 bg-slate-50 p-4'>
             <div className='mb-2'>
               <span className='font-semibold'>1 Applied</span>{' '}
               <span className='text-gray-600'>of 10 capacity</span>
             </div>
             <Progress value={2} />
-          </div>
+          </div> */}
 
           <div className='mt-6 space-y-4'>
-            <div className='flex flex-row justify-between'>
+            {/* <div className='flex flex-row justify-between'>
               <div className='text-gray-500'>Apply Before</div>
               <div className='font-semibold'>31 Mar 2024</div>
             </div>
             <div className='flex flex-row justify-between'>
               <div className='text-gray-500'>Job Posted On</div>
               <div className='font-semibold'>31 Mar 2024</div>
-            </div>
+            </div> */}
             <div className='flex flex-row justify-between'>
               <div className='text-gray-500'>Job Type</div>
-              <div className='font-semibold'>Fulltime</div>
+              <div className='font-semibold'>{data.jobType}</div>
             </div>
             <div className='flex flex-row justify-between'>
               <div className='text-gray-500'>Salary</div>
@@ -61,15 +60,15 @@ const JobDetail: FC<{ data: TGetDetailJob }> = ({ data }) => {
               </div>
             </div>
           </div>
+          {/* 
+          <Separator className='my-10' /> */}
 
-          <Separator className='my-10' />
-
-          <div>
+          {/* <div>
             <div className='text-3xl font-semibold'>Category</div>
             <div className='my-10 inline-flex gap-4'>
               <Badge>Technology</Badge>
             </div>
-          </div>
+          </div> */}
 
           <Separator className='my-10' />
 

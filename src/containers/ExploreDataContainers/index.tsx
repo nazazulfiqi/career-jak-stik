@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { CiFilter } from 'react-icons/ci';
 
 import LoadingDots from '@/components/atoms/LoadingDots';
-import Pagination from '@/components/atoms/pagination';
 import FormFilterDynamic from '@/components/organisms/FormFilterDynamic';
 import FormSearch from '@/components/organisms/FormSearch';
 import { Button } from '@/components/ui/button';
@@ -125,13 +124,13 @@ const ExploreDataContainer: FC<ExploreDataContainerProps> = ({
               </>
             )}
           </div>
-          {!loading && (
+          {/* {!loading && (
             <Pagination
               currentPage={1}
               totalPages={12}
               onPageChange={handlePageChange}
             />
-          )}
+          )} */}
         </div>
       </div>
     </>

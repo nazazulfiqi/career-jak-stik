@@ -1,7 +1,7 @@
 'use client';
 
-// import { logoutRequest } from '../../../hooks/authentications/request';
 import { LucideBuilding, LucideNewspaper, LucideSchool } from 'lucide-react';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
@@ -23,8 +23,6 @@ import { ConsultationIcon } from './assets/icons/ic-consultation';
 import { DiscussionRoomIcon } from './assets/icons/ic-disccussion-room';
 import { WorkOpportunityIcon } from './assets/icons/ic-work';
 import { TBaseLayoutProps } from './types';
-
-// import { useProfile } from '../../../hooks/profile/hook';
 
 const AuthButton: FC = (): ReactElement => (
   <div className='flex gap-4'>
@@ -134,15 +132,10 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
 
   const { data: profileData } = useProfile();
 
-  // console.log(profileData);
-
   const _profile_user = {
     email: profileData?.data?.email as string,
     full_name: profileData?.data?.name as string,
     avatar: profileData?.data?.profilePicture as string,
-    // email: 'zulfiqinaza@gmail.com',
-    // full_name: 'Naza Zulfiqi',
-    // avatar: '/images/stmik.png',
   };
 
   const _mobile_menu_item = [
@@ -170,9 +163,9 @@ export const BaseLayout: FC<TBaseLayoutProps> = ({
 
   return (
     <Fragment>
-      {/* <Head>
-        <title>Kampus Gratis - {title}</title>
-      </Head> */}
+      <Head>
+        <title>Pelayanan Karir - {title}</title>
+      </Head>
       <Navbar
         mobileMenuItems={_mobile_menu_item}
         items={_pop_up_menu}

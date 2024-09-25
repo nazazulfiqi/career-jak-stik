@@ -19,10 +19,11 @@ import {
   TGetDetailJobResponse,
 } from '@/types/jobs';
 
-export const useGetAllJob = (): UseQueryResult<TGetAllJobResponse> =>
+// hook.ts
+export const useGetAllJob = (search?: string): UseQueryResult<TGetAllJobResponse> =>
   useQuery({
-    queryKey: ['get-job'],
-    queryFn: async () => await getAllJobRequest(),
+    queryKey: ['get-job', search],
+    queryFn: async () => await getAllJobRequest(search),
   });
 
 export const useGetDetailJob = (

@@ -1,7 +1,8 @@
-import { COMPANY_SETTING } from '@/lib/endpoints/perusahaan/setting';
+import { ALL_INDUSTRIES, COMPANY_SETTING } from '@/lib/endpoints/perusahaan/setting';
 
 import { api } from '../../../config/api/apiConfig';
 
+import { TGetAllIndustryItem } from '@/types/perusahaan/industry';
 import { TCompanyProfilePayload, TCompanyProfileResponse } from "@/types/perusahaan/setting";
 
 
@@ -24,3 +25,11 @@ export const companyUpdateProfileRequest = async (
   });
   return data;
 };
+
+
+export const getIndustriesRequest = async (): Promise<TGetAllIndustryItem> => {
+  const { data } = await api.get(
+    `${ALL_INDUSTRIES}`
+  );
+  return data;
+}

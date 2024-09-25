@@ -5,11 +5,9 @@ import { api } from '../../config/api/apiConfig';
 import { TApplyJobPayload, TGetAllJobResponse, TGetDetailJobResponse } from "@/types/jobs";
 
 
-
-export const getAllJobRequest = async (): Promise<TGetAllJobResponse> => {
-  const { data } = await api.get(
-    `${JOB}`
-  );
+export const getAllJobRequest = async (search?: string): Promise<TGetAllJobResponse> => {
+  const query = search ? `?search=${encodeURIComponent(search)}` : '';
+  const { data } = await api.get(`${JOB}${query}`);
   return data;
 }
 

@@ -2,7 +2,10 @@
 
 import React, { FC } from 'react';
 
-import { useCompanySettingState } from '@/hooks/perusahaan/setting/hook';
+import {
+  useCompanySettingState,
+  useGetIndustries,
+} from '@/hooks/perusahaan/setting/hook';
 
 import OverviewForm from '@/modules/perusahaan/pengaturan/components/overview-form';
 
@@ -15,6 +18,10 @@ const PerusahaanPengaturanContent: FC<CompanySettingProps> = ({
 }) => {
   const { getCompanySettingData } = useCompanySettingState();
 
+  const { data: industryData } = useGetIndustries();
+
+  console.log(industryData);
+
   return (
     <section>
       <div className='mb-5 text-3xl font-semibold'>Pengaturan</div>
@@ -25,7 +32,11 @@ const PerusahaanPengaturanContent: FC<CompanySettingProps> = ({
           <TabsTrigger value='teams'>Teams</TabsTrigger>
         </TabsList>
         <TabsContent value='overview'> */}
-      <OverviewForm data={getCompanySettingData?.data} isLoading={isLoading} />
+      <OverviewForm
+        data={getCompanySettingData?.data}
+        isLoading={isLoading}
+        industryData={industryData?.data}
+      />
       {/* </TabsContent>
         <TabsContent value='socialLinks'>
           <SocialMediaForm />

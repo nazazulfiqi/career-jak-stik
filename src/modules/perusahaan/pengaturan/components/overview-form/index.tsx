@@ -51,15 +51,21 @@ import {
 } from '@/constant/perusahaan';
 import { overviewFormSchema } from '@/validations/perusahaan/form-schema';
 
+import { TGetAllIndustryItem } from '@/types/perusahaan/industry';
 import { TCompanyProfileItem } from '@/types/perusahaan/setting';
 
 interface CompanySettingProps {
   data: TCompanyProfileItem;
   isLoading: boolean;
+  industryData: TGetAllIndustryItem[] | undefined;
 }
 
-const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
-  console.log(data);
+const OverviewForm: FC<CompanySettingProps> = ({
+  data,
+  isLoading,
+  industryData,
+}) => {
+  console.log(industryData);
 
   const queryClient = useQueryClient();
   const { mutate, isPending } = useUpdateCompanyProfile();
@@ -268,13 +274,11 @@ const OverviewForm: FC<CompanySettingProps> = ({ data, isLoading }) => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {EMPLOYEE_OPTIONS.map(
-                            (item: optionType, i: number) => (
-                              <SelectItem key={item.id + i} value={item.id}>
-                                {item.label}
-                              </SelectItem>
-                            )
-                          )}
+                          {industryData?.map((item: TGetAllIndustryItem) => (
+                            <SelectItem key={item.name} value={item.name}>
+                              {item.name}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />

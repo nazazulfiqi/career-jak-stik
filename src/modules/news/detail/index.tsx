@@ -4,13 +4,15 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React, { FC, Fragment } from 'react';
 
-import { useGetDetailNews } from '@/hooks/news/hook';
+import { useGetDetailNews, useGetRelatedNews } from '@/hooks/news/hook';
 
 import { BreadCrumb } from '@/components/atoms/bread-crumb';
 import LoadingDots from '@/components/atoms/LoadingDots';
 
 import NotFound from '@/app/not-found';
 import RelatedNewsComponent from '@/modules/news/detail/components';
+
+import { TNewsGetAllItem } from '@/types/news';
 
 const DetailNewsModule: FC = () => {
   const NewsDetailBC = [
@@ -27,14 +29,12 @@ const DetailNewsModule: FC = () => {
 
   const params = useParams();
 
-  console.log(params);
-
   const { data, isLoading } = useGetDetailNews(String(params.id));
+  const { data: relatedNewsData, isLoading: relatedNewsLoading } =
+    useGetRelatedNews(String(params.id));
 
-  console.log(data);
+  console.log(relatedNewsData);
 
-  const content =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quibusdam voluptatem libero facere cum ipsa. Aut veniam quas laudantium nihil architecto nam officia ipsa fugiat, eaque ex! Sequi tempore aliquam, quaerat eius nam laboriosam hic odit in modi maxime sed quas at doloremque laudantium ratione, ipsam nostrum ex! Recusandae asperiores laboriosam, quam, quaerat fuga, expedita eaque cumque eveniet consequatur iure quibusdam corrupti quia consectetur! Eum laboriosam cum nam ratione, praesentium quaerat minima enim minus vel quisquam nulla doloribus, cumque, odio sit eveniet perspiciatis culpa deleniti numquam. Ut temporibus reiciendis magnam, consequuntur, saepe omnis, veniam incidunt ratione voluptate esse exercitationem? Numquam.';
   return (
     <Fragment>
       {isLoading ? (
@@ -84,14 +84,19 @@ const DetailNewsModule: FC = () => {
               <section className='col-span-3 mt-6 lg:col-span-1'>
                 <h1 className='font-bold'>Baca berita lainnya</h1>
                 <span className='bg-primary-base mb-2 block h-[4px] w-24 rounded-md'></span>
+
                 <div className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-primary scrollbar-track-black h-[400px] overflow-y-auto'>
-                  {[0, 1, 2, 3, 4].map((item: any) => {
-                    return (
-                      <Fragment key={item + 1}>
-                        <RelatedNewsComponent />
+                  {relatedNewsData && relatedNewsData?.length > 0 ? (
+                    relatedNewsData?.map((item: TNewsGetAllItem) => (
+                      <Fragment key={item.id}>
+                        <RelatedNewsComponent data={item} />
                       </Fragment>
-                    );
-                  })}
+                    ))
+                  ) : (
+                    <p className='text-center text-gray-500'>
+                      Tidak Ada Berita yang sesuai
+                    </p>
+                  )}
                 </div>
               </section>
             </main>

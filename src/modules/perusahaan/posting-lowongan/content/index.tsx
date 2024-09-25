@@ -196,7 +196,11 @@ const PostingLowonganContent: FC = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input className='w-full' placeholder='$100' {...field} />
+                      <Input
+                        className='w-full'
+                        placeholder='Rp.1.000.000'
+                        {...field}
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -212,7 +216,7 @@ const PostingLowonganContent: FC = () => {
                     <FormControl>
                       <Input
                         className='w-full'
-                        placeholder='$1000'
+                        placeholder='Rp.10.000.000'
                         {...field}
                       />
                     </FormControl>

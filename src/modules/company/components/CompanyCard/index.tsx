@@ -12,6 +12,7 @@ const CompanyCard: FC<TCompanyDetailItem> = ({
   name,
   id,
   location,
+  profilePicture,
 }) => {
   const router = useRouter();
 
@@ -22,7 +23,7 @@ const CompanyCard: FC<TCompanyDetailItem> = ({
     >
       <div className='flex flex-row items-start justify-between'>
         <Image
-          src='/images/stmik.png'
+          src={profilePicture ? profilePicture : '/images/stmik.png'}
           alt='Company Logo'
           width={66}
           height={66}

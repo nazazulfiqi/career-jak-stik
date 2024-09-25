@@ -18,6 +18,7 @@ const JobCard: FC<TGetAllJob> = ({
   skills,
   companyName,
   location,
+  companyPicture,
 }) => {
   const router = useRouter();
 
@@ -29,7 +30,7 @@ const JobCard: FC<TGetAllJob> = ({
       <div className='flex flex-row items-start gap-6'>
         <div>
           <Image
-            src='/images/stmik.png'
+            src={companyPicture || '/images/stmik.png'}
             alt='Company Logo'
             width={64}
             height={64}
